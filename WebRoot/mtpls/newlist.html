@@ -1,0 +1,17 @@
+<meta charset="UTF-8">
+   <table class="table table-hover">
+                      <tr>
+                      <th>标题</th>
+                      <th>作者</th>
+                      <th>内容</th>
+                      <th>操作</th>
+                      </tr>
+                      <tr ng-repeat="o in list.goodlist">
+                      <td>{{o.title}}</td>
+                      <td>{{o.auth}}</td>
+                      <td>{{o.descript}}</td>
+                      <td><a ng-click="delnew(o)" href="">删除</a></td>
+                      </tr>
+                      </table>
+<uib-pagination ng-click="setPage(bigCurrentPage)" total-items="list.pagecount*10" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" num-pages="numPages"></uib-pagination>
+    <pre>Page: {{bigCurrentPage}} / {{numPages}}</pre> 

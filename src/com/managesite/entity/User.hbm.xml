@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE hibernate-mapping PUBLIC          
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"          
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+<hibernate-mapping>  
+    <class name="com.managesite.entity.User" table="Users">  
+        <id name="userid" column="userid" length="250" >  
+            <generator class="uuid.hex"></generator>              
+        </id>  
+        <property name="username" length="250" />  
+        <property name="email" length="160" />
+        <property name="createDate" length="160"></property>
+        <property name="password" length="250" />  
+        <set name="roles" table="user_role">  
+            <key column="userid" />  
+            <many-to-many column="roleid" class="com.managesite.entity.Role" />  
+        </set> 
+        <!-- 多对多生成了另一个表
+         <set name="good" table="uservgood" >
+         <key column="userid"> </key>
+         <many-to-many column="good_id" class="com.entity.Goods"> </many-to-many>
+         </set> -->
+        <one-to-one name="userInfo" cascade="all"/>  
+   <!-- 与新闻一对多 -->
+<set name="news" table="sys_news" cascade="all-delete-orphan" 
+            lazy="true" inverse="true">
+            <key column="user_id" /><!-- 确定关联的外键列 -->
+            <one-to-many class="com.managesite.entity.News"  /></set>
+             <!-- 与电影票一对多 -->
+<!-- <set name="tickets" table="ticket_info" cascade="all-delete-orphan" 
+            lazy="true" inverse="true">
+            <key column="user_id" />确定关联的外键列
+            <one-to-many class="com.entity.Ticket"  /></set> -->
+    </class>  
+</hibernate-mapping>  

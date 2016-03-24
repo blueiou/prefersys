@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>	
+<!-- 声明action交由spring管理  -->
+<constant name="struts.ObjectFactory" value="spring"></constant>
+<constant name="struts.i18n.encoding" value="utf-8"></constant>
+<!-- 在配置文件中加入一个自定义常量即可 -->
+<constant name="struts.enable.SlashesInActionNames" value="true"/>
+<package name="showdata" extends="struts-default,json-default" namespace="">
+<!-- 拦截器 -->
+<interceptors>
+<interceptor name="loginInterceptor" class="com.managesite.interceptor.LoginInterceptor">
+</interceptor>
+<interceptor-stack name="NewsPublishStack">
+<interceptor-ref name="defaultStack"></interceptor-ref>
+<interceptor-ref name="loginInterceptor"></interceptor-ref> 
+</interceptor-stack>
+</interceptors>
+
+<default-interceptor-ref name="NewsPublishStack"></default-interceptor-ref>
+<!-- 全局结果 -->
+<!-- <global-results>
+<result name="hello">/testpaging.jsp</result>
+</global-results> -->
+<!-- /拦截器 -->
+<action name="newslist" class="SysNewsManageAction">
+<result type="json">
+<param name="root">dataMap</param>
+</result>
+<result name="error">error.jsp</result>
+
+</action>
+<!-- 分割线 -->
+<action name="api/*" class="SysNewsManageAction" method="{1}">
+<result type="json">
+<param name="root">dataMap</param>
+</result>
+<result name="error">error.jsp</result>
+</action>
+
+<action name="sysuserm" class="SysUserManagementAction">
+<result type="json"> <param name="root">map</param></result>
+<result name="error" type="redirect">error.jsp</result>
+</action>
+
+<!-- 
+<action name="allist" class="EntrieGoodClass">
+<result type="json"><param name="root">dataMap</param></result>
+<result name="error">test.html</result>
+<result name="playbyid">movies/baseInfo/playbyid.jsp</result>
+</action>
+
+<action name="sysuserm" class="SysUserManagementAction">
+<result type="json"> <param name="root">map</param></result>return success 就会返回该map所包含的数据
+<result name="userlogin" type="redirect">movies/index.jsp</result> 成功登陆后返回界面
+<result name="error">test.html</result>
+<result name="uindex">movies/index.jsp</result>
+</action>
+
+<action name="tm" class="TicketManagementAction">
+<result type="json"> <param name="root">map</param></result>
+<result name="error">test.html</result>
+<result name="showorder" type="redirect">user/index.jsp</result>
+<result name="needlogin" type="redirect">user/login.jsp</result>
+
+</action> -->
+
+
+
+
+<!-- just a test -->
+<!-- <action name="test" class="EntrieGoodClass" method="test"></action>
+<action name="testU" class="SysUserManagementAction" method="testU">
+<result type="json"> <param name="root">map</param></result>
+<result name="error">test.html</result>
+<result name="user">test.html</result>
+<result name="manager">test.html</result>
+<result name="administrator">test.html</result>
+</action> -->
+
+</package>
+
+
+</struts>    

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/tx 
+      http://www.springframework.org/schema/tx/spring-tx.xsd
+	 http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop.xsd
+	"
+	>
+<!-- hibernate 注入 -->
+<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+<property name="configLocation"	value="classpath:hibernate.cfg.xml">
+	
+		</property>
+</bean>
+<!--  给hibernateTemplate 中注入sessionFactory-->
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+   <property name="sessionFactory" ref="sessionFactory" />
+</bean>
+
+<!-- 给hibernateSupportDao 中初始化 -->
+<!-- <bean id="AbstractDao" class="com.dao.AbstractDao">
+	<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+			</property>
+	</bean> -->
+	<!-- 定义事务管理器（声明式的事务） -->  
+    <bean id="transactionManager"
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+	<!-- 配置事务的传播性  --> 
+	 <aop:config>
+<aop:advisor pointcut="execution(* com.managesite.service.*.*(..))" advice-ref="txadive" />
+<!-- <aop:advisor pointcut="execution(* com.service.*.*(..))" advice-ref="txadive" /> -->
+
+</aop:config>
+
+<tx:advice id="txadive" transaction-manager="transactionManager">
+<tx:attributes>
+    <tx:method name="save*" propagation="REQUIRED"  />
+    <tx:method name="find*" propagation="NOT_SUPPORTED" read-only="true" />
+</tx:attributes>
+</tx:advice>
+	<!-- 配置数据持久层 --><!-- 公共的继承hibernateTemplate的dao类 -->
+<!-- 	<bean id="PagingDaoImpl" class="com.dao.impl.PagingDaoImpl" scope="prototype">
+	<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="SuperDao" class="com.dao.SuperDao" scope="prototype">
+	<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	<bean id="SysGoodsDaoImpl" class="com.dao.impl.SysGoodsDaoImpl">
+	<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	
+	<bean id="SysTicketDaoImpl" class="com.dao.impl.SysTicketDaoImpl">
+	<property name="hibernateTemplate" ref="hibernateTemplate" ></property>
+	</bean> -->
+	<bean id="SysUserDaoImpl" class="com.managesite.dao.impl.SysUserDaoImpl">
+	<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	<bean id="SysNewsDaoImpl" class="com.managesite.dao.impl.SysNewsDaoImpl">
+	<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+<!-- bo类 --> <!-- 配置业务逻辑层 -->
+<!-- <bean id="SysGoodsBo" class="com.service.SysGoodsService" scope="prototype">
+<property name="sysGoodsDaoImpl" ref="SysGoodsDaoImpl"></property>
+
+</bean>
+
+
+
+<bean id="SysTicketBo" class="com.service.SysTicketService" scope="prototype">
+<property name="sysTicketDaoImpl" ref="SysTicketDaoImpl"></property>
+</bean>
+ -->
+ <bean id="SysUserBo" class="com.managesite.service.SysUsersService" scope="prototype">
+<property name="sysUserDaoImpl" ref="SysUserDaoImpl"></property>
+</bean>
+<bean id="SysNewsBo" class="com.managesite.service.SysNewsService" scope="prototype">
+<property name="sysNewsDaoImpl" ref="SysNewsDaoImpl"></property>
+</bean>
+<!-- action 类--><!-- 配置控制层 -->
+<!-- <bean id="EntrieGoodClass" class="com.action.EntrieGoodAction" scope="prototype">
+<property name="sGoods" ref="SysGoodsBo"></property>
+</bean>	
+
+<bean id="TicketManagementAction" class="com.action.TicketManagementAction">
+<property name="sTicket" ref="SysTicketBo" ></property>
+</bean> -->
+<bean id="SysUserManagementAction" class="com.managesite.action.SysUserManagementAction" scope="prototype">
+<property name="sUser" ref="SysUserBo"></property>
+</bean>
+<bean id="SysNewsManageAction" class="com.managesite.action.SysNewsManageAction" scope="prototype">
+<property name="sNewsManage" ref="SysNewsBo"></property>
+</bean>
+</beans>
