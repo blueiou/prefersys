@@ -39,7 +39,8 @@ public class TestApplication {
 	SysNewsDaoImpl sysNewsDaoImpl=(SysNewsDaoImpl) act.getBean("SysNewsDaoImpl");
 	SysNewsService servic=(SysNewsService) act.getBean("SysNewsBo");
 	SysNewsManageAction sysNewsManageAction=(SysNewsManageAction) act.getBean("SysNewsManageAction");
-	
+	Page page=sysNewsDaoImpl.getPageList(1, 2, 0);
+	System.out.println("查找的总记录数为"+page.getRowcount());
 	/*News news=sysNewsDaoImpl.getNewsById("402881835331481d015331481e870001");
 	Set<NewsImg> imgs=news.getImgs();
 	Set newsimg=new HashSet<>();

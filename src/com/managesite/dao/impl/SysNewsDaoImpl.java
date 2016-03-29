@@ -21,29 +21,29 @@ import com.managesite.entity.NewsLabel;
 import com.managesite.entity.Page;
 import com.managesite.model.NewsModel;
 
-public class SysNewsDaoImpl {
+public class SysNewsDaoImpl<T> extends BaseDaoImpl<T>{
 private HibernateTemplate hibernateTemplate;
-
 public HibernateTemplate getHibernateTemplate() {
 	return hibernateTemplate;
 }
-
 public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 	this.hibernateTemplate = hibernateTemplate;
 }
-
 //获取新闻类型
 public List<NewsLabel> getNewsLabel(){
 	List<NewsLabel> newsLabels=this.hibernateTemplate.find("select new com.managesite.model.NewsLabelModel(n.label_id,n.label) from NewsLabel n");
 	return newsLabels;
 }
 /* 获取新闻类型下的某列新闻
- * @param stemp:新闻归类 0:普通用户 1:图片新闻 2:视频新闻
+ * @param stemp:新闻归类 0:未审核 1:审核不通过 2:审核成功
  */
-public Page getPageList(int pageno ,int pagesize,final int temp,final String label_id){
+public Page getPageList(int pageno ,int pagesize,int temp){
 	Page p = null;
 	System.out.println("使用Query分页");
-	Query query=(Query) this.getHibernateTemplate().execute(new HibernateCallback<Object>(){
+	String hql1="select new com.managesite.model.NewsModel(n.new_id,n.title,n.user.username,n.descript,n.creatTime) from News n where n.newsstatu.status='"+"'";
+	String hql2="select count(*) from NewsStatus where status="+temp;
+p=super.listPage(hql1, hql2, pageno, pagesize);
+	/*Query query=(Query) this.getHibernateTemplate().execute(new HibernateCallback<Object>(){
 		@Override
 		public Object doInHibernate(Session session)
 				throws HibernateException, SQLException {
@@ -67,7 +67,7 @@ public Page getPageList(int pageno ,int pagesize,final int temp,final String lab
 	 if (p==null) 
 		 {
 		 p=new Page(pagecount,pageno, pagesize, slist,rowcount);
-		 }
+		 }*/
 	return p;
 }
 //获取总行数

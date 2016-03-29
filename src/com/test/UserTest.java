@@ -20,7 +20,7 @@ public class UserTest {
     public static void main(String[] args) {  
         UserTest test = new UserTest();  
        //添加用户 顺便赋予角色
-       // test.getAddUserToRole();
+       test.getAddUserToRole();
         //仅仅添加用户
        // test.addUser();
         //仅仅添加用户角色

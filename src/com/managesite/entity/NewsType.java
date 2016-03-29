@@ -33,6 +33,11 @@ public class NewsType implements Serializable{
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public NewsType(String type) {
+		super();
+		this.type = type;
+	}
 	public NewsType() {
 		super();
 		// TODO Auto-generated constructor stub

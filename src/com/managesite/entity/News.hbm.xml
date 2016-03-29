@@ -67,16 +67,6 @@
             <key column="new_id" /><!-- 确定关联的外键列 -->
             <one-to-many class="com.managesite.entity.NewsImg" />
 </set>
- <!-- 与场次一对多    多个电影在多个时间段的场次-->
-<!--<set name="play" table="play" cascade="all-delete-orphan" 
-            lazy="true" inverse="true">
-            <key column="good_id" />确定关联的外键列
-            <one-to-many class="com.entity.Play"  />
-</set> -->
-<!-- <set name="userInfo" table="user_info" cascade="all-delete-orphan" 
-            lazy="true" inverse="true">
-            <key column="good_id" />确定关联的外键列
-            <one-to-many class="com.entity.UserInfo"  />
-</set> -->
+<one-to-one name="newsstatu" cascade="all"></one-to-one>
 </class>
 </hibernate-mapping>

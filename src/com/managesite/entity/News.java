@@ -16,7 +16,8 @@ public class News implements Serializable{
 	private int symbol;//新闻标志
 	private String descript; //新闻描述
 	 private String creatTime;
-	 
+	 //与新闻审核状态一对一
+	 private NewsStatus newsstatu;
 	//与类别多对一
 	private NewsType type;
 	//与用户多对1
@@ -26,6 +27,12 @@ public class News implements Serializable{
 	//与新闻性质多对1
 	private NewsLabel labels;
 	
+	public NewsStatus getNewsstatu() {
+		return newsstatu;
+	}
+	public void setNewsstatu(NewsStatus newsstatu) {
+		this.newsstatu = newsstatu;
+	}
 	public NewsLabel getLabels() {
 		return labels;
 	}

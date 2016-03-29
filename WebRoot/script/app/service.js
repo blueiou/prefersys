@@ -16,15 +16,15 @@ services.factory('goodsList', ['$resource', function ($resource) {
     });
 }]);
 services.factory('newsList', ['$resource', function ($resource) {
-    return $resource('newslist.action', {}, {
+    return $resource('api/news', {}, {
         query: {
             method: 'GET',
             isArray: false,
-            url:'newslist.action',
+            url:'api/news/newList',
         },
         update:{
         	method:'POST',
-        	params:{g_id:"",p_id:"",u_id:""},
+        	//params:{g_id:"",p_id:"",u_id:""},
         	isArray:false,
         }
     });

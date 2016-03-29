@@ -18,7 +18,7 @@ public class UpLoad extends HttpServlet {
 protected void service(HttpServletRequest req, HttpServletResponse resp) 
 throws ServletException, IOException { 
 	//更换传来的文件的名称，采用的是当前的时间+随机生成的一个100以内的数字
-	String rename=new MyDate().getYMDHMS()+MyDate.getRandomN();
+String rename="";
 req.setCharacterEncoding("utf-8"); 
 resp.setContentType("text/html;charset=utf-8"); 
 //为解析类提供配置信息 
@@ -32,6 +32,7 @@ try {
 List<FileItem> items = sfu.parseRequest(req); 
 //区分表单域 
 for (int i = 0; i < items.size(); i++) { 
+	rename=new MyDate().getYMDHMS()+MyDate.getRandomN();
 FileItem item = items.get(i); 
 //isFormField为true，表示这不是文件上传表单域 
 if(!item.isFormField()){ 
@@ -50,13 +51,15 @@ System.out.println("获得相对路径"+req.getRequestURI());
 fileName2 = fileName2.substring(fileName2.lastIndexOf("/")+1); 
 File file = new File(path+"\\"+fileName2); 
 System.out.println("输出的file——"+file);
-if(!file.exists()){ 
-item.write(file);
+if(!file.exists()){
 //将上传图片的名字记录到数据库中 
+item.write(file);
+
+}
+
+} 
+} 
 resp.sendRedirect("error.jsp"); 
-} 
-} 
-} 
 } catch (Exception e) { 
 e.printStackTrace(); 
 } 

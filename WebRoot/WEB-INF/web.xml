@@ -3,7 +3,7 @@
   <display-name>dayday</display-name>
   <servlet>
     <servlet-name>upload</servlet-name>
-    <servlet-class>com.servlet.UpLoad</servlet-class>
+    <servlet-class>com.managesite.servlet.UpLoad</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>upload</servlet-name>

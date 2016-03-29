@@ -32,6 +32,7 @@ import com.managesite.entity.Hall;
 import com.managesite.entity.News;
 import com.managesite.entity.NewsImg;
 import com.managesite.entity.NewsLabel;
+import com.managesite.entity.NewsStatus;
 import com.managesite.entity.NewsType;
 import com.managesite.entity.Play;
 import com.managesite.entity.Role;
@@ -54,29 +55,37 @@ CopyOfUserTest cy=new CopyOfUserTest();
 System.out.print(CheckId.checkId(m));
     Session session=cy.getSession();
 Transaction transaction=session.beginTransaction();
+/**新增一条新闻并且显示审核状态*/
+/*
 MyDate date=new MyDate();
-/*News news=new News();
-news.setTitle("测试1");
+News news=new News();
+news.setTitle("测试2");
 news.setDescript(" ，第88届奥斯卡颁奖典礼在美国洛杉矶杜比剧院结束。在《荒野猎人》中上演搏命演出的莱昂纳多·迪卡普里奥终于获得了学院的青睐，成为新科影帝。从1994年获得最佳男配角提名开始，历经22年的“陪跑”，小李子终于圆了“小金人”之梦。");
 news.setCreatTime(new MyDate().getYMDHMS());
-User user=(User)session.get(User.class, "40288183533181360153318137ff0003");
-NewsType types=(NewsType) session.get(NewsType.class, "402881835330eb01015330eb02150001");
-
-NewsLabel label=new NewsLabel("时政");
+User user=(User)session.get(User.class, "402881e653ad4ca50153ad4cb6290003");
+NewsType types=new NewsType("家电");
+NewsLabel label=new NewsLabel("普通");
 session.save(label);
-news.setLabel(label);
+session.save(types);
+news.setLabels(label);
 news.setType(types);
 news.setUser(user);
 types.getNews().add(news);
 news.setUser(user);
+NewsStatus newsStatus=new NewsStatus();
+newsStatus.setStatus(0);
+newsStatus.setPerson("我");
+newsStatus.setNews(news);
+session.save(newsStatus);
+transaction.commit();*/
 /*session.save(newsImg);
 session.save(news);
 transaction.commit();*/
-News news=(News) session.get(News.class, "402881835331481d015331481e870001");
+/*News news=(News) session.get(News.class, "402881835331481d015331481e870001");
 Set<NewsImg> setlist=news.getImgs();
 for (NewsImg newsImg : setlist) {
 	System.out.println("图片的路径："+newsImg.getImgurl());
-}
+}*/
 //插入
 //News news=(News)session.get(News.class, "40288183533b7d6501533b7d67150001");
 /*User user=(User)session.get(User.class, "40288183533181360153318137ff0003");

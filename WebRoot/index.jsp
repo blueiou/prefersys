@@ -1,16 +1,15 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-
 %>
-
+<%@include file="menu.jsp" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html ng-app="IndexApp">
   <head>
     <base href="<%=basePath%>">
-    <title>Index</title>
+    <title>线下优惠网</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -18,98 +17,128 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
-	--> 
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+	-->
+<link rel="stylesheet" href="./css/bootstrap.css" />
+<link rel="stylesheet" href="./css/ct-paper.css" />
   </head>
-  <script src="script/jquery.js" type="text/javascript"></script>
-<script type="text/javascript">
- $("#button").click(function(){
- alert();
- });
-
- 
-function checksj(){
-   var param = document.getElementById("param").value;
-  // var params = document.getElementById("params").value;
-   if(param == ""  ){
-     alert("随机搜索不能为空");
-     return false;
-   }
-   /* if(params == ""  ){
-    alert("不能为空");
-     return false;
-   } */
-   document.suiji.submit();
-  return true;
-}
-function checkzd(){
-
-  var params = document.getElementById("params").value;
- 
-  if(params == ""  ){
-    alert("指定搜索不能为空");
-     return false;
-   } 
-   document.zhiding.submit();
-  return true;
-}
-</script>  
-  <body>
-  <!--  <form action="datalist.action" method="post">
-   <input type="text" name="param">
-   <input type="submit" value="随机搜索">
-   </form>
-    <form action="specitfdata.action" method="post">
-   <input type="text" name="params" >
-    
-   <select name="sChar" id="sChar">
-	     <option value="*">*</option>
-	     <option value="**">**</option>
-	     <option value="**">***</option>
-	     <option value="**">****</option>
-	     </select>
-   <input type="submit" value="指定搜索">
-   </form> -->
-   <div style="margin-right: 100px;">
- 
-  <div class="row">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <form name="suiji"  action="datalist.action" method="post" onsubmit = "return checksj();">
-   <input type="text" name="param" id="param" class="form-control" placeholder="Search for...">
-       </form><span class="input-group-btn">
-      <button class="btn btn-default" type="button"  onclick="checksj()">随机搜索</button>
-      </span>
-    </div><!-- /input-group -->
-      </div><!-- /.col-lg-6 -->
-    <div class="col-lg-6">
-    <div class="input-group">
-        <form action="specitfdata.action" name="zhiding" method="post">
- 
-     <input type="text" size="66" name="params" id="params"  class="form-control" placeholder="Search for...">
-       <select name="sChar" id="sChar" class=" form-control">
-	     <option value="*">*</option>
-	     <option value="**">**</option>
-	     <option value="***">***</option>
-	     <option value="****">****</option>
-	     <option value="*****">*****</option>
-	     </select>   
+  <body ng-controller="newsctrl">
+   <!-- Navigation -->
+   <div >
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container" >
+            <div class="collapse navbar-collapse" id="">
+                <ul class="nav navbar-nav">
+                <li><a href="#">首页</a></li>
+                    <li>
+                        <a href="#">优惠精选</a>
+                    </li>
+                    <li>
+                        <a href="#">发现</a>
+                    </li>
+                    <li>
+                        <a href="#">联系我们</a>
+                    </li>
+                    <li>
+                    <div >
+	<button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">现场爆料</button>
+</div>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
         
-        </form>  <span class="input-group-btn">
-      <button class="btn btn-default" type="button" onclick="checkzd()">指定搜索</button>
-      </span>
-    
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-
-</div><!-- /.row --> 
-</div>
-
-<div>
-<jsp:forward page="testssh.action"></jsp:forward>
-
-
-
-</div>
+        </div>
+        
+        <!-- /.container -->
+    </nav>
+    <!-- 添加爆料 -->
+        <div uib-collapse="isCollapsed">
+		<div class="well well-lg">
+		   <div class="row">
+                        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
+                            <div class="register-card">
+                                <h3 class="title">Welcome</h3>
+                                <form class="register-form" >
+                                    <label>店名:</label>
+                                    <input id="shopname" name="shopname"  type="text" class="form-control" placeholder="用户名">
+                                     <label>类别:</label>
+                                    <input id="msgtype" name="msgtype"  type="password" class="form-control" placeholder="密码">
+                                      <label>上传图片:</label>
+                                      <input type="file" name="fileName" multiple="multiple" class="btn btn-default" />
+                                    <label for="">优惠简介</label>
+                                    <textarea rows="" cols="" class="form-control"></textarea>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+		</div>
+	</div> 
+	</div>
+	<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">
+			Page Text
+			<small>Secondaty Text</small>
+			</h1>
+		</div>
+	</div>
+	<!-- 列举优惠信息 -->
+	<div class="row">
+	<div class="col-md-3"  >
+		<!-- 标签 -->
+		<div class="well">
+		<h6>最新发现</h6>
+		<p>sdfhsdf skdjksdhashdf kjshf</p>
+		</div>
+		<div class="well">
+		<h6>标签分类</h6>
+		<p>sdfhsdf skdjksdhashdf kjshf</p>
+		</div>
+		<div class="well">
+		<h6>热门推荐</h6>
+		<p>sdfhsdf skdjksdhashdf kjshf</p>
+		</div>
+		<div class="well">
+		</div>
+		<div class="well">
+		<p> ，第88届奥斯卡颁奖典礼在美国洛杉矶杜比剧院结束。在《荒野猎人》中上演搏命演出的莱昂纳多·迪卡普里奥终于获得了学院的青睐，成为新科影帝。从1994年获得最佳男配角提名开始，历经22年的“陪跑”，小李子终于圆了“小金人”之梦。</p>
+		</div>
+		<div class="well">
+		</div>
+		</div>
+	<div   ng-repeat="o in list.newslist">
+		<div class="col-md-4" >
+		<a href="">
+		<img src="http://placehold.it/700x300" alt="" class="img-responsive" /></a>
+		</div>
+		<div class="col-md-5">
+			<h3>{{o.title}}</h3>
+			<p>标签：</p>
+			<p>内容详情简介:{{o.descript}}</p>
+			<a href="" class="btn btn-primary" style="float:right">查看详细<span class="glyphicon glyphicon-chevron-right"></span></a>
+		</div>
+	</div>
+	<center>
+	<uib-pagination ng-click="setPage(bigCurrentPage)" total-items="list.pagecount*10" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" num-pages="numPages"></uib-pagination>
+	</center>
+	</div></div>
+		
   </body>
+   <!-- Angular -->
+  <script src="./script/angularjs/angular.js"></script>
+  <script src="./script/angularjs/angular-resource.js"></script>
+  <script src="./script/angularjs/angular-animate.js"></script>
+   <script src="./script/ui-bootstrap-tpls-1.1.1.js"></script>
+  <!-- UI-Router -->
+  <script src="./script/angularjs/angular-ui-router.js"></script>
+  <!-- App Script -->
+    <script src="./script/app/app.js"></script>
+    <script src="./script/app/service.js"></script>
+    <script src="./script/app/directive.js"></script>
+    <script src="./script/app/filter.js"></script>
+    <script src="./script/app/controller.js"></script>
+    <!-- 其他 -->
+<script src="./script/jquery1.8.js"></script>
+<script src="./script/bootstrap.js"></script>
 </html>

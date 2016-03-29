@@ -10,12 +10,20 @@ public class NewsModel {
 	private String new_id;
 	private String title; //新闻标题
 	private String auth;
+	private String writer;
 	
 	
 	private String descript; //新闻描述
 	private String imagesurl; //新闻图片路径
 	 private String creatTime;
 	 private Set<NewsImg> imgs=new HashSet<>();
+	 
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
 	public String getNew_id() {
 		return new_id;
 	}
@@ -63,38 +71,15 @@ public class NewsModel {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public NewsModel(String title, String auth, String creatTime,String descript, Set<NewsImg> imgs) {
-		super();
-		this.title = title;
-		this.auth = auth;
-		this.creatTime = creatTime;
-		this.descript = descript;
-		this.imgs = imgs;
-	}
-	public NewsModel(String title, String auth, String creatTime,String descript) {
-		super();
-		this.title = title;
-		this.auth = auth;
-		this.creatTime = creatTime;
-		this.descript = descript;
-	}
-	public NewsModel(String title, Set<NewsImg> imgs) {
-		super();
-		this.title = title;
-		this.imgs = imgs;
-	}
-	public NewsModel(String new_id, String title, String auth) {
+	//查看信息
+	public NewsModel(String new_id, String title, String writer,
+			String descript, String creatTime) {
 		super();
 		this.new_id = new_id;
 		this.title = title;
-		this.auth = auth;
-	}
-	public NewsModel(String new_id, String title, String auth, Set<NewsImg> imgs) {
-		super();
-		this.new_id = new_id;
-		this.title = title;
-		this.auth = auth;
-		this.imgs = imgs;
+		this.writer = writer;
+		this.descript = descript;
+		this.creatTime = creatTime;
 	}
 	 
 	

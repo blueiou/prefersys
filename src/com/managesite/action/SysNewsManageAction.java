@@ -41,7 +41,7 @@ public void setNew_id(String new_id) {
 	}
 
 	public String execute(){
-		/*String mString=request.getParameter("m");
+		String mString=request.getParameter("m");
 		int m=-1;
 		if (CacheClass.isEmpty(mString)||!CacheClass.isNumValue(mString)) m=1510;
 		else {
@@ -49,11 +49,11 @@ public void setNew_id(String new_id) {
 		}
 		System.out.print("snews m的值为："+mString);
 		switch (m) {
-		case Functions.Admin_NEWSListInfo: //5041
-			return newList();
+		case Functions.GET_GOODS_OPERATION_LIST0: //5041
+			//return newList();
 		default:
 			break;
-		}*/
+		}
 		return SUCCESS;
 	}
 	//获取普通新闻类型
@@ -77,7 +77,7 @@ public void setNew_id(String new_id) {
 		return SUCCESS;
 	}
 	//获取普通新闻详细信息
-	public String normal_new(){
+	/*public String normal_new(){
 		if (dataMap==null)  dataMap=new HashMap<String, Object>();
 		if (CacheClass.isEmpty(new_id)) {
 			return null;
@@ -87,7 +87,7 @@ public void setNew_id(String new_id) {
 			dataMap.put("data", newsModel);
 			return SUCCESS;
 		}
-	}
+	}*/
 	
 /*	public String newList(){
 		if (dataMap==null)  dataMap=new HashMap<String, Object>();
@@ -107,8 +107,6 @@ public void setNew_id(String new_id) {
 		dataMap.put("success", true);
 		return SUCCESS;
 	}*/
-	
-	
 	public void test(){
 		
 	}

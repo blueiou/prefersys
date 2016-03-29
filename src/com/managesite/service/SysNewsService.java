@@ -37,7 +37,7 @@ public class SysNewsService {
 	 */
 	public Page findNewsListByLabel(int pageno,int pagesize,final int temp,final String label_id){
 		if (p==null)  p=new Page();
-		p=sysNewsDaoImpl.getPageList(pageno, pagesize,temp,label_id);
+		p=sysNewsDaoImpl.getPageList(pageno, pagesize,temp);
 		int pagecount=p.getPagecount();
 		if(pageno<=2||pageno>=pagecount) p.setPagelast(2);
 		else p.setPagelast(pageno);
@@ -46,7 +46,7 @@ public class SysNewsService {
 		if (pageno>pagecount) p.setPageno(pagecount);
 		return p;
 	}
-	public NewsModel findNewsById(String id){
+/*	public NewsModel findNewsById(String id){
 		NewsModel newsModel=sysNewsDaoImpl.getNewsById(id);
 		if (CacheClass.isEmpty(id)||list.size()==0) {
 			new PulginsException("该ID不存在");
@@ -56,7 +56,7 @@ public class SysNewsService {
 			return newsModel;
 		}
 		return null;
-	}
+	}*/
 	
 	public void test(){
 		System.out.println("SysNewsService");

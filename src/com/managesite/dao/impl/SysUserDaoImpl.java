@@ -35,21 +35,7 @@ private DbConnect dbConnect;
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 		this.hibernateTemplate = hibernateTemplate;
 	}
-/*	public User login(String na, String pa) {
-		   String f_name= "from User u where u.username=? and u.password=?"; 
-	List<User> userlist=	hibernateTemplate.find(f_name, new String[]{na,pa});
-	if (userlist.size()==0) 	return null;
-	User users=userlist.get(0);
-	String f_role="from  Role r where r.roleid in (select roleid from User_role where userid=?)";
-	List<Role> rolelist=	hibernateTemplate.find(f_role, users.getUserid());
-	Set<String> u1Roles = new HashSet<String>();
-	for (int i = 0; i < rolelist.size(); i++) {
-		Role roles=rolelist.get(i);
-		u1Roles.add(roles.getRolename());
-	}
-	users.setRoles(u1Roles);
-	return users;
-	}*/
+
 	public List uLogin(String na, String pa){
 		  String f_name= "from User u where u.username=? and u.password=?";  
 			List<User> userlist=this.hibernateTemplate.find(f_name, new String[]{na,pa});

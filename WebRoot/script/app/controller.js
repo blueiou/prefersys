@@ -1,4 +1,21 @@
 var app=angular.module('mv.controller',['ui.bootstrap', 'ui.router']);
+//导航
+app.controller('newsctrl', function ($scope,newsList) {
+  $scope.isCollapsed = true;
+  $scope.currentPage=1;
+  $scope.msglist=function(){
+newsList.query({pageno:$scope.currentPage},function(res){
+				 $scope.list=res.msglist;
+				 console.log($scope.list);
+			});
+  };
+  $scope.setPage = function (pageNo) {
+	    $scope.currentPage = pageNo;		     
+	   $scope.msglist();			   
+		   };
+  $scope.msglist();
+  
+});
 //********************影片管理
 app.controller('showing',function ($scope,$interval,$http,$log,$uibModal,goodsList){
 		//传入当前的页码到后台
