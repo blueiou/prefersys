@@ -33,18 +33,15 @@ public final int USERINFO_OPERATION_DEL_ORDER=USERINFO_OPERATION+150; //250 删�
 public final int TICKET_OPERATION=1700;   //从选座位开始
 public final int TICKET_OPERATION_SEARCH_SEAT=TICKET_OPERATION+10;// 1710查询可预订的位置
 public final int TICKET_OPERATION_PRODUCED_ORDER=TICKET_OPERATION+25;//1725 生成订单
-
-
 //*********************后台管理类******************************
 public final int Admin_OPERATION = 5000;
-public final int Admin_UserListInfo=Admin_OPERATION+1;     //用户列表
+public final int Admin_UserListInfo=Admin_OPERATION+1;     //5001 用户列表
 public final int Admin_UserDisabled0=Admin_OPERATION+2;     //启用 用户	
 public final int Admin_UserDisabled1=Admin_OPERATION+3;     //禁止用户	
 public final int Admin_UserDisabled2_No=Admin_OPERATION+4;     //冻结用户
 public final int Admin_UserDisabled2_Yes=Admin_OPERATION+5;     //解冻用户
-
+public final int Admin_UserDel=Admin_OPERATION+6;    //删除用户
 public final int Admin_UserInfo=Admin_OPERATION+10;          //用户详细信息
-
 public final int Admin_NEWSVERIFYLISTINFO=Admin_OPERATION+15;      //审核列表
 public final int Admin_NEWSVERIFYLISTINFO_0=Admin_OPERATION+16; //审核拒绝
 public final int Admin_NEWSVERIFYLISTINFO_1=Admin_OPERATION+17;  //审核通过

@@ -50,7 +50,7 @@
                        <a><%=uname %>，欢迎您</a>
                     </li>
                     <li >
-                        <a href="user/userinfo.jsp" target="" onclick="" class="glyphicon glyphicon-shopping-cart">我的订单</a>
+                        <a href="user/userinfo.jsp" target="" onclick="" class="glyphicon glyphicon-shopping-cart">个人中心</a>
                     </li> 
                     <li>
                        <a href="">退出</a>

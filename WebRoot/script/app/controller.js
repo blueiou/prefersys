@@ -245,12 +245,12 @@ app.controller('MyController',  function($scope, TreeViewService) {
             children: []
         },*/
         {
-            id: 2,
-            name: '新闻管理',
+            id: 1,
+            name: '用户管理',
             children: [
                 {
-                    id: 10,
-                    name: '增加新闻',
+                    id: 1,
+                    name: '查看用户',
                     children: [],
                       /*  {
                             id: 20,
@@ -259,8 +259,8 @@ app.controller('MyController',  function($scope, TreeViewService) {
                         }*/
                 
                 },{
-                	id: 11,
-                    name: '修改新闻',
+                	id: 2,
+                    name: '新增用户',
                     children: []
                 }
             ]

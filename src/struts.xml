@@ -19,9 +19,9 @@
 
 <default-interceptor-ref name="NewsPublishStack"></default-interceptor-ref>
 <!-- 全局结果 -->
-<!-- <global-results>
-<result name="hello">/testpaging.jsp</result>
-</global-results> -->
+<global-results>
+<result name="errors">/testpaging.jsp</result>
+</global-results> 
 <!-- /拦截器 -->
 <action name="newslist" class="SysNewsManageAction">
 <result type="json">
@@ -42,9 +42,14 @@
 <result type="json"> <param name="root">dataMap</param></result>
 <result name="error" type="redirect">error.jsp</result>
 </action>
-
-
-
+<action name="api/user" class="UserAction" >
+<result type="json"> <param name="root">map</param></result>
+<result name="error" type="redirect">error.jsp</result>
+</action>
+<action name="api/sysuser" class="SysUserManagementAction">
+<result type="json"> <param name="root">map</param></result>
+<result name="error" type="redirect">error.jsp</result>
+</action>
 <!-- just a test -->
 <!-- <action name="test" class="EntrieGoodClass" method="test"></action>
 <action name="testU" class="SysUserManagementAction" method="testU">

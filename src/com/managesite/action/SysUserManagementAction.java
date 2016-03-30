@@ -20,11 +20,18 @@ public class SysUserManagementAction extends AjaxActionSupport{
    private Object reply=null;
    private Map<String, Object> map;
    private  PublicData publicData;
+   private final static int pageSize=5;
 	public SysUsersService getsUser() {
 	return sUser;
 }
 public void setsUser(SysUsersService sUser) {
 	this.sUser = sUser;
+}
+public Map<String, Object> getMap() {
+	return map;
+}
+public void setMap(Map<String, Object> map) {
+	this.map = map;
 }
 	@Override
 	public String execute() throws Exception {
@@ -42,8 +49,6 @@ public void setsUser(SysUsersService sUser) {
 		switch (m) {
 		case Functions.USERINFO_OPERATION_ISSUE: //用户评价
 			return userIssue();
-		case Functions.USERINFO_OPERATION_LOGIN: //150 用户登录
-			return getUser();
 		case Functions.USERINFO_OPERATION_QUERY_ORDER://200查询订单
 			return getOrders();
 		case Functions.USERINFO_OPERATION_INDEX: //-1返回首页
@@ -52,9 +57,34 @@ public void setsUser(SysUsersService sUser) {
 			System.out.println("m");
 			delOrder();
 			break;
+		case Functions.Admin_UserListInfo: //5001 管理员在后台获取用户列表
+			return getUsers();
+		case Functions.Admin_UserDisabled1: //禁止用户
+			break;
+		case Functions.Admin_UserDisabled0: //启用用户
 		}
 		return ERROR;
 	}
+	//查找用户
+	private String getUsers() {
+		System.out.println("进入查询用户信息");
+		// TODO Auto-generated method stub
+		map=new HashMap<String, Object>();
+		int pageno=1;
+		if (request.getParameter("pageno")!=null) {
+			String pagenoString=request.getParameter("pageno");
+			if(CacheClass.checkPage(pagenoString))  pageno=Integer.parseInt(pagenoString);
+		}
+		reply=sUser.findUsers(pageno, pageSize);
+		map.put("users", reply);
+		return SUCCESS;
+	}
+	//删除用户
+	public void delUser(){
+		String uid=request.getParameter("uid");
+       sUser.delUser(uid);
+	}
+	
 	public String  userIssue() {
 		map=new HashMap<String, Object>();
 		reply=sUser.findByMid(request.getParameter("mid"));
@@ -63,7 +93,7 @@ public void setsUser(SysUsersService sUser) {
 	}
 	//查看用户个人订单
 	public String getOrders(){
-		map=new HashMap<>();
+		map=new HashMap<String, Object>();
 		HttpSession session=request.getSession();
 		String uidString=(String) session.getAttribute("uid");
 		if (!CacheClass.isEmpty(uidString)) {
@@ -78,7 +108,7 @@ public void setsUser(SysUsersService sUser) {
 		}
 		return SUCCESS;
 	}
-	//用户登录
+	/*//用户登录
 	public String getUser(){
 		System.out.println("进入登录");
 		 HttpSession session=request.getSession();
@@ -86,8 +116,6 @@ public void setsUser(SysUsersService sUser) {
 			User user=sUser.findUserUnit(request.getParameter("uname"), request.getParameter("upass"));
 			String code=request.getParameter("code");
 			String sescode=(String)session.getAttribute("rand");
-			System.out.println(code+"??"+(String)session.getAttribute("rand"));
-			
 			if (code==null||sescode==null||!code.equals(sescode)) {
 				System.out.println("验证码不正确");
 				map.put("er_msg", "验证码不正确");
@@ -113,9 +141,9 @@ public void setsUser(SysUsersService sUser) {
 					return SUCCESS;
 				}
 			}
-		
+		map.put("user","error");
 			return SUCCESS;
-	}
+	}*/
 	public void delOrder(){
 		HttpSession session=request.getSession();
 		String uidString=(String) session.getAttribute("uid");
@@ -132,12 +160,7 @@ public void setsUser(SysUsersService sUser) {
 	public String getIndex(){
 		return "uindex";
 	}
-	public Map<String, Object> getMap() {
-		return map;
-	}
-	public void setMap(Map<String, Object> map) {
-		this.map = map;
-	}
+
 	public String  testU(){
 		/*  HttpSession session=request.getSession();
 		map=new HashMap<String, Object>();

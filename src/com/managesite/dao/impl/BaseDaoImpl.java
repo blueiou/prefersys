@@ -1,13 +1,16 @@
 package com.managesite.dao.impl;
 import java.sql.SQLException;
 import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+
 import com.managesite.dao.BaseDao;
 import com.managesite.entity.Page;
+import com.managesite.entity.User;
 public class BaseDaoImpl<T> implements BaseDao<T>{
 private HibernateTemplate hibernateTemplate;
 public HibernateTemplate getHibernateTemplate() {
@@ -128,5 +131,12 @@ public Page listPage() {
 	// TODO Auto-generated method stub
 	return null;
 }
+
+@Override
+public List<T> getlist() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
 
 }

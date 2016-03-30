@@ -82,6 +82,9 @@
 <bean id="SysUserManagementAction" class="com.managesite.action.SysUserManagementAction" scope="prototype">
 <property name="sUser" ref="SysUserBo"></property>
 </bean>
+<bean id="UserAction" class="com.managesite.action.UserAction" scope="prototype">
+<property name="loginUser" ref="SysUserBo"></property>
+</bean>
 <bean id="SysNewsManageAction" class="com.managesite.action.SysNewsManageAction" scope="prototype">
 <property name="sNewsManage" ref="SysNewsBo"></property>
 </bean>

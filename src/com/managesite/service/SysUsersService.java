@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Set;
 
 import com.managesite.dao.impl.SysUserDaoImpl;
+import com.managesite.entity.Page;
 import com.managesite.entity.Role;
 import com.managesite.entity.User;
 import com.managesite.model.OrdersInfo;
 import com.managesite.model.PublicData;
+import com.managesite.model.UserInfoModel;
 import com.managesite.tools.CacheClass;
 import com.managesite.tools.PulginsException;
 public class SysUsersService {
@@ -23,6 +25,17 @@ public class SysUsersService {
 		if (CacheClass.isEmpty(mid)) return null;
 		return sysUserDaoImpl.getContentById(mid);
 		
+	}
+	public Page findUsers(int pageno,int pagesize){
+		Page p=new Page();
+	    p=sysUserDaoImpl.getUsers(pageno, pagesize,"");
+		int pagecount=p.getPagecount();
+		if(pageno<=2||pageno>=pagecount) p.setPagelast(2);
+		else p.setPagelast(pageno);
+		if(pageno>=pagecount||pageno<0) p.setPageNext(pagecount-1);
+		else p.setPageNext(pageno);
+		if (pageno>pagecount) p.setPageno(pagecount);
+		return p;
 	}
 	public User findUserUnit(String na,String pa){
 		if (CacheClass.isEmpty(na)||CacheClass.isEmpty(pa)) {
@@ -68,6 +81,14 @@ public class SysUsersService {
 	public void delOrder(String uid,String oid){
 		if (!CacheClass.isEmpty(uid)&&!CacheClass.isEmpty(oid)) {
 			sysUserDaoImpl.del(uid, oid);
+		}
+		else {
+			return;
+		}
+	}
+	public void delUser(String uid){
+		if (!CacheClass.isEmpty(uid)) {
+			sysUserDaoImpl.del(uid);
 		}
 		else {
 			return;

@@ -9,11 +9,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     <title>管理首页</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -22,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <link rel="stylesheet" href="./css/font-awesome.min.css" />
    <link href="./css/bootstrap.min.css" rel="stylesheet"> 
   <link rel="stylesheet" href="./css/ct-paper.css" /> 
-   <link rel="stylesheet" href="./treeview/example/style.css" />
+   <link rel="stylesheet" href="./css/style.css" />
     
   </head>
   <style type="text/css">
@@ -56,12 +51,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
                         <div class="col-md-10" >
    <div class="well">
-   <!-- 采用ui-router -->
-       <!--  <h4>新闻标题</h4>
-                    <div class="row" ui-view="">
-                    </div> -->
-                    <div ui-view=""></div>
-                    <uib-tabset justified="true" >
+   
+   <div ng-if="myService.selectedNode.id==1">
+        用户管理>>{{myService.selectedNode.name}}
+   <hr> 
+   
+   </div>
+   <div ng-if="myService.selectedNode.id==2">
+      用户管理>>新增用户
+   <hr>
+   </div>
+                   <!--  <uib-tabset justified="true" >
                            <uib-tab heading="查看新闻" class="uib-tab ng-isolate-scope" >
                            <div style="margin-top:30px;" ng-controller="newslist">
                            <table class="table table-hover" >
@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                            </div>
                            </uib-tab>
                            <uib-tab heading="增加新闻" class="">新闻</uib-tab>
-</uib-tabset>
+</uib-tabset> -->
         </div>                     
 </div>
         </div>
@@ -104,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </p>
 <br />
 <p>Selected node<br />
-    {{myService.selectedNode.template}}</p><br />
+    {{myService.selectedNode.id}}</p><br />
 
 <tree-view tree-service="myService" node-label="name" item-class="pull-left" item-ng-include=""></tree-view>
  </div>    
