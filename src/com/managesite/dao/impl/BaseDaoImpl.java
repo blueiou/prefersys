@@ -21,7 +21,7 @@ public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 	this.hibernateTemplate = hibernateTemplate;
 }
 
-private Class<T> class1;
+protected Class<T> class1;
 
 @Override
 public void saveEntity(T t) {
@@ -131,12 +131,17 @@ public Page listPage() {
 	// TODO Auto-generated method stub
 	return null;
 }
-
 @Override
 public List<T> getlist() {
 	// TODO Auto-generated method stub
 	return null;
 }
-
+public List<T> getlist(String hql) {
+	// TODO Auto-generated method stub
+	return this.hibernateTemplate.find(hql);
+}
+public T getEntity(Class<T> t,String id){
+	return this.hibernateTemplate.get(t, id);
+}
 
 }

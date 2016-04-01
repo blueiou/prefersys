@@ -110,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div   ng-repeat="o in list.newslist">
 		<div class="col-md-4" >
 		<a href="">
-		<img src="http://placehold.it/700x300" alt="" class="img-responsive" /></a>
+		<img src="api/" alt="" class="img-responsive" /></a>
 		</div>
 		<div class="col-md-5">
 			<h3>{{o.title}}</h3>

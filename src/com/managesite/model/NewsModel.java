@@ -7,16 +7,16 @@ import com.managesite.entity.NewsImg;
 
 public class NewsModel {
 
-	private String new_id;
-	private String title; //新闻标题
-	private String auth;
-	private String writer;
+	public String new_id;
+	public String title; //新闻标题
+	public String auth;  //爆料者
+	public String writer;
 	
 	
-	private String descript; //新闻描述
-	private String imagesurl; //新闻图片路径
-	 private String creatTime;
-	 private Set<NewsImg> imgs=new HashSet<>();
+	public String descript; //新闻描述
+	public String imagesurl; //新闻图片路径
+	 public String creatTime;
+	 public Set<NewsImg> imgs=new HashSet<>();
 	 
 	public String getWriter() {
 		return writer;

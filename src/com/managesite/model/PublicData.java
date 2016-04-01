@@ -12,7 +12,6 @@ public class PublicData {
     public String name;//呢称
     public String sex;//性别，0为女性
 	public String avatar;//头像
- 
 	private List<OrdersInfo> ordersInfo;
 	
 	private List<NewsModel> newsModels;

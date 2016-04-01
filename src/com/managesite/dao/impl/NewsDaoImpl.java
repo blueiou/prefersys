@@ -1,8 +1,9 @@
 package com.managesite.dao.impl;
 
+import com.managesite.entity.News;
 import com.managesite.entity.Page;
 
-public class NewsDaoImpl<T> extends BaseDaoImpl<T>{
+public class NewsDaoImpl extends BaseDaoImpl<News>{
 	//获取前台优惠信息
 	public Page getPageList(int pageno ,int pagesize,int temp){
 		Page p = null;
@@ -12,7 +13,10 @@ public class NewsDaoImpl<T> extends BaseDaoImpl<T>{
 	p=super.listPage(hql1, hql2, pageno, pagesize);
 	return p;
 	}
-	
+	//获取详情
+	public News getEntity(String n_id){
+		return super.getEntity(News.class,n_id);
+	}
 	
 	
 }

@@ -41,7 +41,7 @@
                        <a href="register.jsp" target="_blank">注册</a>
                     </li>
                     <li >
-                        <a href="login.jsp" target="_blank" onclick="alert('请登录')" class="glyphicon glyphicon-shopping-cart">我的订单</a>
+                        <a href="login.jsp" target="_blank" onclick="alert('请登录')" class="glyphicon glyphicon-shopping-cart">个人中心</a>
                     </li>
                     
      <%} 

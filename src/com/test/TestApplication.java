@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.managesite.action.SysNewsManageAction;
 import com.managesite.dao.SysTicketManageDao;
+import com.managesite.dao.impl.NewsDaoImpl;
 import com.managesite.dao.impl.SysGoodsDaoImpl;
 import com.managesite.dao.impl.SysNewsDaoImpl;
 import com.managesite.dao.impl.SysTicketDaoImpl;
@@ -35,12 +36,12 @@ public class TestApplication {
 	SysTicketDaoImpl sysTicketDaoImpl=(SysTicketDaoImpl) act.getBean("SysTicketDaoImpl");
 	SysTicketService sysTicketService=(SysTicketService) act.getBean("SysTicketBo");*/
 	SysUserDaoImpl sysUserDaoImpl=(SysUserDaoImpl) act.getBean("SysUserDaoImpl");
-	
+	NewsDaoImpl newsDaoImpl=(NewsDaoImpl) act.getBean("NewsDaoImpl");
 	SysNewsDaoImpl sysNewsDaoImpl=(SysNewsDaoImpl) act.getBean("SysNewsDaoImpl");
 	SysNewsService servic=(SysNewsService) act.getBean("SysNewsBo");
 	SysNewsManageAction sysNewsManageAction=(SysNewsManageAction) act.getBean("SysNewsManageAction");
-	Page page=sysUserDaoImpl.getUsers(1,2,"0");
-	System.out.println("查找的总记录数为"+page.getRowcount());
+	//News news=(News)newsDaoImpl.getEntity("22");
+	System.out.println("查找的实体类为"+newsDaoImpl.getEntity("22").getDescript());
 	
 	
 	/*News news=sysNewsDaoImpl.getNewsById("402881835331481d015331481e870001");

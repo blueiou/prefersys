@@ -52,6 +52,7 @@
 	<mapping resource="com/managesite/entity/NewsImg.hbm.xml" />
 	<mapping resource="com/managesite/entity/NewsLabel.hbm.xml" />
 	<mapping resource="com/managesite/entity/NewsStatus.hbm.xml" />
-	
+	<mapping resource="com/managesite/entity/UserComment.hbm.xml" />
+
 </session-factory>
 </hibernate-configuration>

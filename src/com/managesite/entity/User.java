@@ -21,7 +21,15 @@ public class User implements Serializable{
 		private Set<Ticket> tickets;//与电影票一对多
 		//与影片一对多
 		private Set<News> news;
+		//与用户评价一对多
+		private Set<UserComment> u_comment;
 		
+		public Set<UserComment> getU_comment() {
+			return u_comment;
+		}
+		public void setU_comment(Set<UserComment> u_comment) {
+			this.u_comment = u_comment;
+		}
 		public Set<News> getNews() {
 			return news;
 		}

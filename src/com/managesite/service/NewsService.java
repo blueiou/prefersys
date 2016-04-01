@@ -1,7 +1,12 @@
 package com.managesite.service;
 
+
 import com.managesite.dao.impl.NewsDaoImpl;
+import com.managesite.entity.News;
 import com.managesite.entity.Page;
+import com.managesite.model.NewsModel;
+import com.managesite.model.PublicData;
+import com.managesite.tools.CacheClass;
 
 public class NewsService {
    private NewsDaoImpl newsDaoImpl;
@@ -12,6 +17,7 @@ public class NewsService {
 public void setNewsDaoImpl(NewsDaoImpl newsDaoImpl) {
 	this.newsDaoImpl = newsDaoImpl;
 }
+//分页
 	public Page findPageList(int pageno,int pagesize,int temp){
 		if (p==null)  p=new Page();
 	    p=newsDaoImpl.getPageList(pageno, pagesize,temp);
@@ -23,5 +29,20 @@ public void setNewsDaoImpl(NewsDaoImpl newsDaoImpl) {
 		if (pageno>pagecount) p.setPageno(pagecount);
 		return p;
 	}
-	
+public NewsModel findUnique(String idString){
+	NewsModel newsModel = new NewsModel();
+	if (CacheClass.isEmpty(idString)) {
+		return null;
+	}
+	else {
+		News news=newsDaoImpl.getEntity(idString);
+	if(news!=null){
+		newsModel.setTitle(news.getTitle());
+		newsModel.setAuth(news.getUser().getUsername());
+		newsModel.setCreatTime(news.getCreatTime());
+		return	newsModel;
+	}	
+	return null;
+	}
+}
 }

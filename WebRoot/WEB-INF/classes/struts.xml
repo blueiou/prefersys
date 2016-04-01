@@ -37,11 +37,14 @@
 </result>
 <result name="error">error.jsp</result>
 </action>
-
+<!-- 前端################################## -->
+<!-- 新闻 -->
 <action name="api/news/*" class="NewsAction" method="{1}">
 <result type="json"> <param name="root">dataMap</param></result>
 <result name="error" type="redirect">error.jsp</result>
+<result name="detail">../../conten/p/detail.jsp</result>
 </action>
+<!-- 用户 -->
 <action name="api/user" class="UserAction" >
 <result type="json"> <param name="root">map</param></result>
 <result name="error" type="redirect">error.jsp</result>
@@ -59,7 +62,6 @@
 <result name="manager">test.html</result>
 <result name="administrator">test.html</result>
 </action> -->
-
 </package>
 
 

@@ -38,6 +38,7 @@ import com.managesite.entity.Play;
 import com.managesite.entity.Role;
 import com.managesite.entity.Ticket;
 import com.managesite.entity.User;
+import com.managesite.entity.UserComment;
 import com.managesite.entity.UserInfo;
 import com.managesite.entity.UserVGood;
 import com.managesite.model.GoodVPlayVHall;
@@ -55,6 +56,12 @@ CopyOfUserTest cy=new CopyOfUserTest();
 System.out.print(CheckId.checkId(m));
     Session session=cy.getSession();
 Transaction transaction=session.beginTransaction();
+UserComment userComment=new UserComment();
+userComment.setComment_content("很值得，希望卖家多多举行该类活动");
+userComment.setUsers((User)session.get(User.class,"11"));
+userComment.setNews((News)session.get(News.class, "22"));;
+session.save(userComment);
+transaction.commit();
 /**新增一条新闻并且显示审核状态*/
 /*
 MyDate date=new MyDate();

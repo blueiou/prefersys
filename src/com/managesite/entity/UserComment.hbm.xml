@@ -5,10 +5,10 @@
 <hibernate-mapping>
 <class name="com.managesite.entity.UserComment" table="user_comment">
 <id name="comment_id" column="comment_id" length="100">
-<generator class="uuid.hex"></generator>
+<generator class="increment"></generator>
 </id>
 <property name="comment_content"></property>
-<many-to-one name="user"
+<many-to-one name="users"
  class="com.managesite.entity.User"
  cascade="none"
  outer-join="auto"
@@ -18,6 +18,14 @@
  column="user_id"
  not-null="true"
  lazy="false"
+></many-to-one>
+<!-- 与新闻一对多 -->
+<many-to-one name="news" class="com.managesite.entity.News"
+
+insert="true"
+column="news_id"
+not-null="true"
+lazy="false"
 ></many-to-one>
 </class>
 

@@ -20,12 +20,20 @@
          <key column="userid"> </key>
          <many-to-many column="good_id" class="com.entity.Goods"> </many-to-many>
          </set> -->
+         <!-- 与用户基本信息一对一的关系 -->
         <one-to-one name="userInfo" cascade="all"/>  
 <!-- 与新闻一对多 -->
 <set name="news" table="sys_news" cascade="all-delete-orphan" 
             lazy="true" inverse="true">
             <key column="user_id" /><!-- 确定关联的外键列 -->
             <one-to-many class="com.managesite.entity.News"  /></set>
+<!-- 与用户评论表一对多 -->      
+ <set name="u_comment" table="user_comment" cascade="all-delete-orphan"
+ lazy="true" inverse="true"
+ >
+ <key column="user_id"> </key>
+ <one-to-many class="com.managesite.entity.UserComment"></one-to-many>
+ </set>          
              <!-- 与电影票一对多 -->
 <!-- <set name="tickets" table="ticket_info" cascade="all-delete-orphan" 
             lazy="true" inverse="true">

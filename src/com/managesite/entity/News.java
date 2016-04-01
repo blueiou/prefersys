@@ -26,7 +26,15 @@ public class News implements Serializable{
 	private Set<NewsImg> imgs;
 	//与新闻性质多对1
 	private NewsLabel labels;
+	//与评论一对多
+	private Set<UserComment> u_comment;
 	
+	public Set<UserComment> getU_comment() {
+		return u_comment;
+	}
+	public void setU_comment(Set<UserComment> u_comment) {
+		this.u_comment = u_comment;
+	}
 	public NewsStatus getNewsstatu() {
 		return newsstatu;
 	}
