@@ -68,6 +68,9 @@
 	<bean id="SysNewsDaoImpl" class="com.managesite.dao.impl.SysNewsDaoImpl">
 	<property name="hibernateTemplate" ref="hibernateTemplate"></property>
 	</bean>
+	<bean id="UserOperateDaoImpl" class="com.managesite.dao.impl.UserOperateDaoImpl">
+	
+	</bean>
 <!-- bo类 --> <!-- 配置业务逻辑层 -->
  <bean id="SysUserBo" class="com.managesite.service.SysUsersService" scope="prototype">
 <property name="sysUserDaoImpl" ref="SysUserDaoImpl"></property>
@@ -75,8 +78,11 @@
 <bean id="SysNewsBo" class="com.managesite.service.SysNewsService" scope="prototype">
 <property name="sysNewsDaoImpl" ref="SysNewsDaoImpl"></property>
 </bean>
-<bean name="NewsBo" class="com.managesite.service.NewsService" scope="prototype">
+<bean id="NewsBo" class="com.managesite.service.NewsService" scope="prototype">
 <property name="newsDaoImpl" ref="NewsDaoImpl"></property>
+</bean>
+<bean id="UserOpBo" class="com.managesite.service.UserOperateService" scope="prototype">
+<property name="userOperateDaoImpl" ref="UserOperateDaoImpl"></property>
 </bean>
 <!-- action 类--><!-- 配置控制层 -->
 <bean id="SysUserManagementAction" class="com.managesite.action.SysUserManagementAction" scope="prototype">
@@ -91,6 +97,8 @@
 <bean id="NewsAction" class="com.managesite.action.NewsAction" scope="prototype">
 <property name="sNews" ref="NewsBo"></property>
 </bean>
-
+<bean id="UserOperateAction" class="com.managesite.action.UserOperateAction" scope="prototype">
+<property name="userOp" ref="UserOpBo"></property>
+</bean>
 
 </beans>

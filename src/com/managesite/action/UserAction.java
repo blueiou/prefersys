@@ -1,7 +1,18 @@
 package com.managesite.action;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
+
 import com.managesite.entity.User;
 import com.managesite.model.PublicData;
 import com.managesite.service.SysUsersService;
@@ -65,6 +76,7 @@ public class UserAction extends AjaxActionSupport{
 		return SUCCESS;
 		
 	}
+	//用户登录
 	public String getUser(){
 		System.out.println("进入登录");
 		 HttpSession session=request.getSession();
@@ -88,6 +100,7 @@ public class UserAction extends AjaxActionSupport{
 			}
 				else if (user!=null) {
 					System.out.println("user not null ");
+					this.session.put("uid2", user.getUserid());
 					session.setAttribute("uid", user.getUserid());
 					session.setAttribute("uname", uname);
 					session.setAttribute("urole", user.getRoles());
@@ -99,6 +112,80 @@ public class UserAction extends AjaxActionSupport{
 			}
 		map.put("user","error");
 			return SUCCESS;
+	}
+	//用户添加优惠信息
+	public String addNews() throws IOException{
+		String pathString=ServletActionContext.getServletContext().getRealPath("/temp/imgs");
+		 //基于文件创建一个文件输入流
+		File file =new File(pathString);
+		if (!file.exists()) {
+			file.mkdir();
+		}
+		System.out.println("输出店名字"+request.getParameter("shopname"));
+		FileUtils.copyFile(upload, new File(file,uploadFileName));
+      /*  InputStream is = new FileInputStream(upload);  
+           
+        // 设置上传文件目录  
+        String uploadPath = ServletActionContext.getServletContext()  
+                .getRealPath("/upload");  
+        File file =new File(uploadPath);
+		if (!file.exists()) {
+			file.mkdir();
+		}
+        // 设置目标文件  
+        
+        File toFile = new File(uploadPath, this.getUploadFileName());  
+          
+        // 创建一个输出流  
+        OutputStream os = new FileOutputStream(toFile);  
+  
+        //设置缓存  
+        byte[] buffer = new byte[1024];  
+  
+        int length = 0;  
+  
+        //读取myFile文件输出到toFile文件中  
+        while ((length = is.read(buffer)) > 0) {  
+            os.write(buffer, 0, length);  
+        }  
+        System.out.println("上传店名"+shopname);  
+        System.out.println("上传文件名"+uploadFileName);  
+        System.out.println("上传文件类型"+uploadContentType);  
+        //关闭输入流  
+        is.close();  
+          
+        //关闭输出流  
+        os.close();  */
+	reply="上传成功";
+		return "input";
+	}
+	private File upload;
+	private String uploadContentType;
+	private String uploadFileName;
+	
+	public Object getReply() {
+		return reply;
+	}
+	public void setReply(Object reply) {
+		this.reply = reply;
+	}
+	public File getUpload() {
+		return upload;
+	}
+	public void setUpload(File upload) {
+		this.upload = upload;
+	}
+	public String getUploadContentType() {
+		return uploadContentType;
+	}
+	public void setUploadContentType(String uploadContentType) {
+		this.uploadContentType = uploadContentType;
+	}
+	public String getUploadFileName() {
+		return uploadFileName;
+	}
+	public void setUploadFileName(String uploadFileName) {
+		this.uploadFileName = uploadFileName;
 	}
 	
 }

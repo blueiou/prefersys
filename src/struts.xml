@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
-<struts>	
+<struts>
+<!-- 在配置文件中加入一个自定义常量即可 -->
+<constant name="struts.enable.SlashesInActionNames" value="true"/>	
 <!-- 声明action交由spring管理  -->
 <constant name="struts.ObjectFactory" value="spring"></constant>
 <constant name="struts.i18n.encoding" value="utf-8"></constant>
-<!-- 在配置文件中加入一个自定义常量即可 -->
-<constant name="struts.enable.SlashesInActionNames" value="true"/>
+
 <package name="showdata" extends="struts-default,json-default" namespace="">
 <!-- 拦截器 -->
 <interceptors>
@@ -45,10 +46,14 @@
 <result name="detail">../../conten/p/detail.jsp</result>
 </action>
 <!-- 用户 -->
-<action name="api/user" class="UserAction" >
+ <action name="api/user" class="UserAction" >
 <result type="json"> <param name="root">map</param></result>
 <result name="error" type="redirect">error.jsp</result>
 </action>
+ <action name="api/userop/*" class="UserOperateAction" method="{1}">
+<result name="input" >/error.jsp</result>
+<result name="error" type="redirect">error.jsp</result>
+</action> 
 <action name="api/sysuser" class="SysUserManagementAction">
 <result type="json"> <param name="root">map</param></result>
 <result name="error" type="redirect">error.jsp</result>

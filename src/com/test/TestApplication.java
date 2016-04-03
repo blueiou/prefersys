@@ -41,7 +41,7 @@ public class TestApplication {
 	SysNewsService servic=(SysNewsService) act.getBean("SysNewsBo");
 	SysNewsManageAction sysNewsManageAction=(SysNewsManageAction) act.getBean("SysNewsManageAction");
 	//News news=(News)newsDaoImpl.getEntity("22");
-	System.out.println("查找的实体类为"+newsDaoImpl.getEntity("22").getDescript());
+	System.out.println("查找的实体类为"+newsDaoImpl.getEntity("22").getU_comment().size());
 	
 	
 	/*News news=sysNewsDaoImpl.getNewsById("402881835331481d015331481e870001");

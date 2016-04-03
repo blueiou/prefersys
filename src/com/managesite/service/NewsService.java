@@ -30,6 +30,7 @@ public void setNewsDaoImpl(NewsDaoImpl newsDaoImpl) {
 		return p;
 	}
 public NewsModel findUnique(String idString){
+	PublicData publicData;
 	NewsModel newsModel = new NewsModel();
 	if (CacheClass.isEmpty(idString)) {
 		return null;
@@ -40,6 +41,13 @@ public NewsModel findUnique(String idString){
 		newsModel.setTitle(news.getTitle());
 		newsModel.setAuth(news.getUser().getUsername());
 		newsModel.setCreatTime(news.getCreatTime());
+		System.out.println("用户评价"+news.getU_comment().size());
+		System.out.println("图片"+news.getImgs().size());
+		
+		if (!news.getU_comment().isEmpty()) {
+			newsModel.setUserComments(news.getU_comment());
+		}
+		
 		return	newsModel;
 	}	
 	return null;

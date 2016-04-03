@@ -85,6 +85,7 @@ public class NewsAction extends AjaxActionSupport{
 			dataMap.put("success", true);
 			return SUCCESS;
 		}
+	//获取详情信息
 	public String detail(){
 		dataMap=new HashMap<>();
 		String id=request.getParameter("p");
@@ -93,7 +94,7 @@ public class NewsAction extends AjaxActionSupport{
 		return "detail";
 		
 	}
-	
+	//
 	
 		public void test(){
 			

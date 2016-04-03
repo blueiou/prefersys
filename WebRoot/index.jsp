@@ -1,9 +1,5 @@
 
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 <%@include file="menu.jsp" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html ng-app="IndexApp">
@@ -20,6 +16,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 <link rel="stylesheet" href="./css/bootstrap.css" />
 <link rel="stylesheet" href="./css/ct-paper.css" />
+<style type="text/css">
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px !important;
+  direction: ltr;
+  cursor: pointer;
+}
+</style>
   </head>
   <body ng-controller="newsctrl">
    <!-- Navigation -->
@@ -58,15 +72,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
                             <div class="register-card">
                                 <h3 class="title">Welcome</h3>
-                                <form class="register-form" >
+                         <form method="post" enctype="multipart/form-data"  action="api/userop/addNews" >         
                                     <label>店名:</label>
-                                    <input id="shopname" name="shopname"  type="text" class="form-control" placeholder="用户名">
-                                     <label>类别:</label>
-                                    <input id="msgtype" name="msgtype"  type="password" class="form-control" placeholder="密码">
+                                    <input id="shopname" name="shopname"  type="text" class="form-control" placeholder="标题">
+                                      <label for="">优惠简介：</label>
+                                    <textarea rows="" cols="" class="form-control" name="content"></textarea>
+                               
                                       <label>上传图片:</label>
-                                      <input type="file" name="fileName" multiple="multiple" class="btn btn-default" />
-                                    <label for="">优惠简介</label>
-                                    <textarea rows="" cols="" class="form-control"></textarea>
+                                      <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i> 
+        <span>选择图片</span>
+        <input type="file" id="upload" name="upload" multiple="multiple"/>
+        </span>
+                <input type="submit" value="提交" />                   
                                 </form>
                             </div>
                         </div>

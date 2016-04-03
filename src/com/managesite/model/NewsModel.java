@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.managesite.entity.NewsImg;
+import com.managesite.entity.UserComment;
 
 public class NewsModel {
 
@@ -15,9 +16,16 @@ public class NewsModel {
 	
 	public String descript; //新闻描述
 	public String imagesurl; //新闻图片路径
-	 public String creatTime;
+	 public String creatTime; 
+	 public Set<UserComment> userComments;
 	 public Set<NewsImg> imgs=new HashSet<>();
 	 
+	public Set<UserComment> getUserComments() {
+		return userComments;
+	}
+	public void setUserComments(Set<UserComment> userComments) {
+		this.userComments = userComments;
+	}
 	public String getWriter() {
 		return writer;
 	}

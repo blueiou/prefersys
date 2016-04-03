@@ -1,12 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!-- Bootstrap Core CSS -->
-    <link href="<%=request.getContextPath() %>/css/bootstrap.css" rel="stylesheet" /> 
-   <link href="<%=request.getContextPath() %>/css/bootstrap.min.css" rel="stylesheet"> 
+    <link href="<%=path %>/css/bootstrap.css" rel="stylesheet" /> 
+   <link href="<%=path %>/css/bootstrap.min.css" rel="stylesheet"> 
     <!-- Custom CSS -->
      <!-- jQuery -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/ct-paper.css" />
+<link rel="stylesheet" href="<%=path %>/css/ct-paper.css" />
     <!-- Bootstrap Core JavaScript -->
   
   <nav class="navbar-default navbar-static-top" role="navigation">

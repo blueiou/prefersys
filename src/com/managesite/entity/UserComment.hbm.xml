@@ -8,6 +8,7 @@
 <generator class="increment"></generator>
 </id>
 <property name="comment_content"></property>
+<property name="com_creatTime"></property>
 <many-to-one name="users"
  class="com.managesite.entity.User"
  cascade="none"
@@ -20,12 +21,15 @@
  lazy="false"
 ></many-to-one>
 <!-- 与新闻一对多 -->
-<many-to-one name="news" class="com.managesite.entity.News"
-
-insert="true"
-column="news_id"
-not-null="true"
-lazy="false"
+<many-to-one name="news"
+ class="com.managesite.entity.News" cascade="none"
+ outer-join="auto"
+ update="true"
+ insert="true"
+ access="property"
+ column="news_id"
+ not-null="true"
+ lazy="false"
 ></many-to-one>
 </class>
 

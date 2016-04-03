@@ -9,10 +9,19 @@ public class UserComment implements Serializable{
 	private static final long serialVersionUID = 1073100192133955730L;
 private int comment_id;
 private String comment_content;
+private String com_creatTime;
 //与用户多对一
 private User users;
 //与优惠信息 多对一
-private News news; 
+private News news;
+
+
+public String getCom_creatTime() {
+	return com_creatTime;
+}
+public void setCom_creatTime(String com_creatTime) {
+	this.com_creatTime = com_creatTime;
+}
 public User getUsers() {
 	return users;
 }

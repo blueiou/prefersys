@@ -27,14 +27,7 @@
 <property name="creatTime" type="java.lang.String">
 <column name="creatTime" length="100"></column>
 </property>
-<!-- 与用户评价一对多 -->
-<set name="u_comment" table="user_comment" cascade="all-delete-orphan"
-lazy="true"
-inverse="true"
->
-<key column="news_id"></key>
-<one-to-many class="com.managesite.entity.News"/>
-</set>
+
 <!-- 其中的name要在News实体类中为NewsType的一个实例对象 -->
 <many-to-one name="type"
  class="com.managesite.entity.NewsType"
@@ -75,6 +68,16 @@ inverse="true"
             <key column="new_id" /><!-- 确定关联的外键列 -->
             <one-to-many class="com.managesite.entity.NewsImg" />
 </set>
+<!-- 与用户评价一对多 -->
+<set name="u_comment" table="user_comment" cascade="all-delete-orphan"
+ lazy="false"
+ inverse="true"
+ batch-size="10"
+>
+<key column="news_id"></key>
+<one-to-many class="com.managesite.entity.UserComment"/>
+</set>
+<!-- 新闻审核状态 -->
 <one-to-one name="newsstatu" cascade="all"></one-to-one>
 </class>
 </hibernate-mapping>
