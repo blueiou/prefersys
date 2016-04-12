@@ -29,6 +29,7 @@ public void setNewsDaoImpl(NewsDaoImpl newsDaoImpl) {
 		if (pageno>pagecount) p.setPageno(pagecount);
 		return p;
 	}
+	//获取详情
 public NewsModel findUnique(String idString){
 	PublicData publicData;
 	NewsModel newsModel = new NewsModel();

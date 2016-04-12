@@ -47,18 +47,18 @@ public class UserOperateAction extends AjaxActionSupport{
 	//用户添加优惠信息
 	public String addNews() throws IOException{
 		/*String userid=(String)*/
-		this.session.get("");
+		System.out.println("店名字"+request.getParameter("shopname"));
+		String uidString=(String) this.session.get("u_id");
 		String pathString=ServletActionContext.getServletContext().getRealPath("/images/temp/add");
 		File file=new File(pathString);
-		if (file.exists()) {
+		if (!file.exists()) {
 			file.mkdir();
 		}
 		for (int i = 0; i < upload.length; i++) {
-			System.out.println("店名字"+request.getParameter("shopname"));
 			FileUtils.copyFile(upload[i], new File(file,uploadFileName[i]));
 		}
 		reply="上传成功";
-		return "input";
+		return SUCCESS;
 	}
 	
 	

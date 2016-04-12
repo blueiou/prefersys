@@ -16,6 +16,7 @@
 	-->
 <link rel="stylesheet" href="./css/bootstrap.css" />
 <link rel="stylesheet" href="./css/ct-paper.css" />
+<link rel="stylesheet" href="./css/fileinput.css" media="all" type="text/css" />	
 <style type="text/css">
 .fileinput-button {
   position: relative;
@@ -78,11 +79,12 @@
                                       <label for="">优惠简介：</label>
                                     <textarea rows="" cols="" class="form-control" name="content"></textarea>
                                
-                                      <label>上传图片:</label>
-                                      <span class="btn btn-success fileinput-button">
-        <i class="glyphicon glyphicon-plus"></i> 
-        <span>选择图片</span>
-        <input type="file" id="upload" name="upload" multiple="multiple"/>
+                                      <label class="">上传图片:</label>
+                                      <span class="form-group">
+                   <input id="vailimages" type="file" name="upload" multiple="multiple" multiple class="file" data-overwrite-initial="false" data-min-file-count="1"> 
+                  <!-- <input id="file-1" type="file" multiple class="file" name="upload" data-overwrite-initial="false" data-min-file-count="2" > -->
+             
+       <!--  <input type="file" id="upload" name="upload" multiple="multiple"/> -->
         </span>
                 <input type="submit" value="提交" />                   
                                 </form>
@@ -143,6 +145,7 @@
 	</div></div>
 		
   </body>
+
    <!-- Angular -->
   <script src="./script/angularjs/angular.js"></script>
   <script src="./script/angularjs/angular-resource.js"></script>
@@ -159,4 +162,20 @@
     <!-- 其他 -->
 <script src="./script/jquery1.8.js"></script>
 <script src="./script/bootstrap.js"></script>
+<script src="./script/fileinput.js"></script>
+<script src="./script/fileinput_locale_zh.js"></script>
+  <script type="text/javascript">
+  $("#vailimages").fileinput({
+      //uploadUrl: '#', // you must set a valid URL here else you will get an error
+      allowedFileExtensions : ['jpg', 'png','gif','bmp'],
+      overwriteInitial: false,
+      maxFileSize: 3072,
+      maxFilesNum: 10,
+      allowedFileTypes: ['image'],
+      slugCallback: function(filename) {
+          return filename.replace('(', '_').replace(']', '_');
+      }
+	});
+
+  </script>
 </html>

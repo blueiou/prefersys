@@ -24,10 +24,10 @@ public class LoginInterceptor implements Interceptor{
 AjaxActionSupport basetionActionSupport=(AjaxActionSupport) invocation.getAction();
 if (basetionActionSupport instanceof UserAction 
 	||basetionActionSupport instanceof NewsAction) {
-		System.out.println("放行拦截");
+		System.out.println("放行,不拦截");
 		return invocation.invoke();
 	}
-		return  invocation.invoke();//放行 不拦截
+		return  invocation.invoke();//放行,不拦截
 	}
 
 }

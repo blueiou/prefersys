@@ -100,7 +100,7 @@ public class UserAction extends AjaxActionSupport{
 			}
 				else if (user!=null) {
 					System.out.println("user not null ");
-					this.session.put("uid2", user.getUserid());
+					this.session.put("u_id", user.getUserid());//存放用户id
 					session.setAttribute("uid", user.getUserid());
 					session.setAttribute("uname", uname);
 					session.setAttribute("urole", user.getRoles());

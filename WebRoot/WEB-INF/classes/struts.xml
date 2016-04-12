@@ -19,7 +19,7 @@
 </interceptors>
 
 <default-interceptor-ref name="NewsPublishStack"></default-interceptor-ref>
-<!-- 全局结果 -->
+<!-- 拦截器全局结果 -->
 <global-results>
 <result name="errors">/testpaging.jsp</result>
 </global-results> 
@@ -38,6 +38,10 @@
 </result>
 <result name="error">error.jsp</result>
 </action>
+<action name="api/sysuser" class="SysUserManagementAction">
+<result type="json"> <param name="root">map</param></result>
+<result name="error" type="redirect">error.jsp</result>
+</action>
 <!-- 前端################################## -->
 <!-- 新闻 -->
 <action name="api/news/*" class="NewsAction" method="{1}">
@@ -50,14 +54,20 @@
 <result type="json"> <param name="root">map</param></result>
 <result name="error" type="redirect">error.jsp</result>
 </action>
- <action name="api/userop/*" class="UserOperateAction" method="{1}">
-<result name="input" >/error.jsp</result>
-<result name="error" type="redirect">error.jsp</result>
+<!-- 用户操作 -->
+<action name="api/userop/*" class="UserOperateAction" method="{1}">
+<interceptor-ref name="fileUpload">
+<!-- 设置文件上传类型 -->
+<param name="allowedTypes">
+image/bmp,image/jpg,image/jpeg,image/gif,image/png
+</param>
+<param name="maximumSize">3M</param>
+</interceptor-ref>
+<interceptor-ref name="NewsPublishStack"></interceptor-ref><!-- 若在自定义的拦截器中配置好了则不用 -->
+<result name="input" >/exception/uploadfail.html</result>
+<result name="success" type="redirect">/error.jsp</result>
 </action> 
-<action name="api/sysuser" class="SysUserManagementAction">
-<result type="json"> <param name="root">map</param></result>
-<result name="error" type="redirect">error.jsp</result>
-</action>
+
 <!-- just a test -->
 <!-- <action name="test" class="EntrieGoodClass" method="test"></action>
 <action name="testU" class="SysUserManagementAction" method="testU">

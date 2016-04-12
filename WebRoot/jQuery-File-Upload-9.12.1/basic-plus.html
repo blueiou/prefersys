@@ -69,7 +69,7 @@
         <i class="glyphicon glyphicon-plus"></i>
         <span>Add files...</span>
         <!-- The file input field used as target for the file upload widget -->
-        <input id="fileupload" type="file" name="files[]" multiple>
+        <input id="fileupload" type="file" name="upload" multiple>
     </span>
     <br>
     <br>
@@ -96,7 +96,7 @@
         </div>
     </div>
 </div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="../script/jquery-1.12.1.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <script src="js/vendor/jquery.ui.widget.js"></script>
 <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
@@ -126,7 +126,7 @@ $(function () {
     'use strict';
     // Change this to the location of your server-side upload handler:
     var url = window.location.hostname === 'blueimp.github.io' ?
-                '//jquery-file-upload.appspot.com/' : 'server/php/',
+                '' : '../api/userop/addNews',
         uploadButton = $('<button/>')
             .addClass('btn btn-primary')
             .prop('disabled', true)
