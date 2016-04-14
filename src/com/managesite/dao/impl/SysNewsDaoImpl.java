@@ -83,6 +83,7 @@ public NewsModel getNewsById(String id) {
 	NewsModel model=getNewsModel(news);
 	return model;
 }
+//获取新闻图片
 public NewsModel getNewsModel(News news){
 	NewsModel newsModel=new NewsModel();
 	newsModel.setNew_id(news.getNew_id());

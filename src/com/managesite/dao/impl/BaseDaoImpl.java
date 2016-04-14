@@ -9,6 +9,8 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import com.managesite.dao.BaseDao;
+import com.managesite.entity.NewsLabel;
+import com.managesite.entity.NewsType;
 import com.managesite.entity.Page;
 import com.managesite.entity.User;
 public class BaseDaoImpl<T> implements BaseDao<T>{
@@ -143,5 +145,13 @@ public List<T> getlist(String hql) {
 public T getEntity(Class<T> t,String id){
 	return this.hibernateTemplate.get(t, id);
 }
+public NewsType getTypeEntity(Class<NewsType> class2, String t_id) {
+	// TODO Auto-generated method stub
+	return this.hibernateTemplate.get(class2, t_id);
+}
 
+public NewsLabel getLabelEntity(Class<NewsLabel> class2, String string) {
+	// TODO Auto-generated method stub
+	return this.hibernateTemplate.get(class2, string);
+}
 }

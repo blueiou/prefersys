@@ -9,7 +9,7 @@ import java.sql.Statement;
 import com.mysql.jdbc.PreparedStatement;
 
 public class DbConnect {
-private Connection connection=null;
+//private Connection connection=null;
 	public DbConnect(){
 	
 			try {
@@ -20,12 +20,12 @@ private Connection connection=null;
 				e.printStackTrace();
 			} 
 	}
-	 public boolean getConnection()  {
-		      //  Connection	con=null;
+	 public static Connection getConnection()  {
+		      Connection	con=null;
 				try {
 				//	Class.forName(DbParams.getDriver()).newInstance();
-					connection= (Connection) DriverManager.getConnection(DbParams.getUrl(), DbParams.getName(), DbParams.getPassword());
-					connection.setAutoCommit(true);
+					con= (Connection) DriverManager.getConnection(DbParams.getUrl(), DbParams.getName(), DbParams.getPassword());
+					con.setAutoCommit(false);
 				} 
 				 catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -35,10 +35,10 @@ private Connection connection=null;
 			//return con;
 			 //加载驱动,注册到驱动管理器
 				
-			return true;
+			return con;
 			//创建Connection链接
 		 }
-	public Statement getStatement() throws Exception{
+/*	public Statement getStatement() throws Exception{
 		if(connection==null) getConnection();
 			Statement st= (Statement) connection.createStatement();//获取Statement
 			return st;
@@ -49,9 +49,9 @@ private Connection connection=null;
 		{ getConnection();}
 			PreparedStatement ps=(PreparedStatement)connection.prepareStatement(sql);
 			return ps;
-	}
+	}*/
 	
-	public boolean update(String sql){
+/*	public boolean update(String sql){
 		int i=-1;
 		try {
 			i = getPreparedStatemen(sql).executeUpdate();
@@ -68,17 +68,17 @@ private Connection connection=null;
 		return false;
 	}
 	
-	public void closeconn(){
+	public void closeconn(Connection connections){
 		try {
 			if(getStatement()!= null)  getStatement().close(); 
-			if(connection!=null){
-				connection.close();
+			if(connections!=null){
+				connections.close();
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 	public static void closeConnection(Connection con) {
 		if (con != null) {
 			try {

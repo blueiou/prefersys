@@ -23,10 +23,9 @@
 
 <many-to-one name="news"
 class="com.managesite.entity.News"
- cascade="none"
+ cascade="save-update"
  outer-join="auto"
  update="true"
- insert="false"
  access="property"
  column="new_id"
  not-null="false"

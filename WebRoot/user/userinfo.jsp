@@ -1,8 +1,4 @@
 <%@ page language="java" import="java.util.*,com.managesite.tools.CacheClass" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 <%@ include file="../menu.jsp" %>
 <%
 if(CacheClass.isEmpty((String)session.getAttribute("uid"))) response.sendRedirect("login.jsp");

@@ -7,18 +7,23 @@ import com.managesite.entity.NewsImg;
 import com.managesite.entity.UserComment;
 
 public class NewsModel {
-
 	public String new_id;
 	public String title; //新闻标题
 	public String auth;  //爆料者
 	public String writer;
-	
-	
 	public String descript; //新闻描述
 	public String imagesurl; //新闻图片路径
 	 public String creatTime; 
 	 public Set<UserComment> userComments;
-	 public Set<NewsImg> imgs=new HashSet<>();
+	 public int status; //新闻审核状态
+
+	 public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public Set<NewsImg> imgs=new HashSet<>();
 	 
 	public Set<UserComment> getUserComments() {
 		return userComments;
@@ -89,6 +94,14 @@ public class NewsModel {
 		this.descript = descript;
 		this.creatTime = creatTime;
 	}
-	 
+	 //用户查看审核状态
+	public NewsModel(String title, String creatTime,
+			int status) {
+		super();
+		this.title = title;
+		this.creatTime = creatTime;
+		this.status = status;
+	}
+	
 	
 }

@@ -14,7 +14,7 @@ public class Role implements Serializable{
     private Integer ordernum;  
     private String description;  
     private Set users = new HashSet();  
-  
+    private Set<UserRole> userRoles=new HashSet<>();
     public Role() {  
         super();  
     }  

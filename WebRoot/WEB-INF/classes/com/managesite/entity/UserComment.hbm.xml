@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC          
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"          
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.managesite.entity.UserComment" table="user_comment">
+<id name="comment_id" column="comment_id" length="100">
+<generator class="increment"></generator>
+</id>
+<property name="comment_content"></property>
+<property name="com_creatTime"></property>
+<many-to-one name="users"
+ class="com.managesite.entity.User"
+ cascade="none"
+ outer-join="auto"
+ update="true"
+ insert="true"
+ access="property"
+ column="user_id"
+ not-null="true"
+ lazy="false"
+></many-to-one>
+<!-- 与新闻一对多 -->
+<many-to-one name="news"
+ class="com.managesite.entity.News" cascade="none"
+ outer-join="auto"
+ update="true"
+ insert="true"
+ access="property"
+ column="news_id"
+ not-null="true"
+ lazy="false"
+></many-to-one>
+</class>
+
+
+
+</hibernate-mapping> 

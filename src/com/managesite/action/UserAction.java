@@ -15,6 +15,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.managesite.entity.User;
 import com.managesite.model.PublicData;
+import com.managesite.model.UserInfoModel;
 import com.managesite.service.SysUsersService;
 import com.managesite.tools.CacheClass;
 import com.managesite.tools.Functions;
@@ -81,33 +82,35 @@ public class UserAction extends AjaxActionSupport{
 		System.out.println("进入登录");
 		 HttpSession session=request.getSession();
 			map=new HashMap<String, Object>();
-			User user=loginUser.findUserUnit(uname, upass);
 			String code=request.getParameter("code");
 			String sescode=(String)session.getAttribute("rand");
 			if (code==null||sescode==null||!code.equals(sescode)) {
 				System.out.println("验证码不正确");
-				map.put("er_msg", "验证码不正确");
 				map.put("success", false);
-				return SUCCESS;
+				map.put("er_msg", "验证码不正确");
+				//return SUCCESS;
 			}
 			else {
+				UserInfoModel user=loginUser.findUserUnit(uname, upass);
 				System.out.println("else");
 				if (user==null) {
+				map.put("success", false);
 				map.put("user", null);
 				map.put("er_msg", "用户不存在");
-				map.put("success", false);
-				return SUCCESS;
+				
+				//return SUCCESS;
 			}
 				else if (user!=null) {
 					System.out.println("user not null ");
-					this.session.put("u_id", user.getUserid());//存放用户id
-					session.setAttribute("uid", user.getUserid());
+					super.session.put("u_id", user.userid);//存放用户id
+					session.setAttribute("uid", user.userid);
 					session.setAttribute("uname", uname);
-					session.setAttribute("urole", user.getRoles());
+					session.setAttribute("urole",user.userRole);
+					System.out.println("用户角色"+user.userRole);
 					//session.setAttribute("urole", value);
 					map.put("user", user);
 					map.put("success", true);
-					return SUCCESS;
+					//return SUCCESS;
 				}
 			}
 		map.put("user","error");

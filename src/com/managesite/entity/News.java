@@ -23,7 +23,7 @@ public class News implements Serializable{
 	//与用户多对1
 	private User user;
 	//与图片1对多
-	private Set<NewsImg> imgs;
+	private Set<NewsImg> imgs=new HashSet();
 	//与新闻性质多对1
 	private NewsLabel labels;
 	//与评论一对多
@@ -98,6 +98,12 @@ public class News implements Serializable{
 	public News() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public News(String title, String descript, String creatTime) {
+		super();
+		this.title = title;
+		this.descript = descript;
+		this.creatTime = creatTime;
 	}
 	
 	

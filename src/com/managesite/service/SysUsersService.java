@@ -21,11 +21,11 @@ public class SysUsersService {
 	public void setSysUserDaoImpl(SysUserDaoImpl sysUserDaoImpl) {
 		this.sysUserDaoImpl = sysUserDaoImpl;
 	}
-	public List findByMid(String mid){
+	/*public List findByMid(String mid){
 		if (CacheClass.isEmpty(mid)) return null;
 		return sysUserDaoImpl.getContentById(mid);
 		
-	}
+	}*/
 	public Page findUsers(int pageno,int pagesize){
 		Page p=new Page();
 	    p=sysUserDaoImpl.getUsers(pageno, pagesize,"");
@@ -37,14 +37,16 @@ public class SysUsersService {
 		if (pageno>pagecount) p.setPageno(pagecount);
 		return p;
 	}
-	public User findUserUnit(String na,String pa){
+	public UserInfoModel findUserUnit(String na,String pa){
 		if (CacheClass.isEmpty(na)||CacheClass.isEmpty(pa)) {
 			new PulginsException("非法参数");
 		}
-		List<User> userlist=sysUserDaoImpl.uLogin(na, pa);//传入到数据处理层
+		List<String> userlist=sysUserDaoImpl.uLogin2(na, pa);//传入到数据处理层
+		//List<User> userlist=sysUserDaoImpl.uLogin(na, pa);//传入到数据处理层
 		if (userlist.size()==0) {new PulginsException("没有该用户"); return null;}
 		else {
-			User user=userlist.get(0);
+			UserInfoModel user=sysUserDaoImpl.uLogin3(userlist.get(0));
+			//User user=userlist.get(0);
 		/*Set<Role>	role=new HashSet<>();
 		role=user.getRoles();
 		Iterator iterator=role.iterator();// 获得一个迭代子

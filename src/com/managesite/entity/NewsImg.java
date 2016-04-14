@@ -50,5 +50,9 @@ public class NewsImg implements Serializable{
 		this.imgurl = imgurl;
 		this.videourl = videourl;
 	}
+	public NewsImg(String imgurl) {
+		super();
+		this.imgurl = imgurl;
+	}
 	
 }

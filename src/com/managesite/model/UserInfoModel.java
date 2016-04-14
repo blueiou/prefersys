@@ -1,7 +1,10 @@
 package com.managesite.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import com.managesite.entity.Role;
 import com.managesite.entity.UserInfo;
 
 public class UserInfoModel {
@@ -11,8 +14,14 @@ public class UserInfoModel {
 	public String username;  
 	public String password;  
 	public UserInfo userInfo;
-	public String userRole;
+	public Set<String> userRole=new HashSet<>();
 	
+	public Set<String> getUserRole() {
+		return userRole;
+	}
+	public void setUserRole(Set<String> userRole) {
+		this.userRole = userRole;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -49,12 +58,6 @@ public class UserInfoModel {
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
 	}
-	public String getUserRole() {
-		return userRole;
-	}
-	public void setUserRole(String userRole) {
-		this.userRole = userRole;
-	}
 	public UserInfoModel() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -63,6 +66,16 @@ public class UserInfoModel {
 		super();
 		this.email = email;
 		this.username = username;
+	}
+	//登录信息模型
+	public UserInfoModel(String userid) {
+		super();
+		this.userid = userid;
+	}
+	public UserInfoModel(String userid, Set<String> userRole) {
+		super();
+		this.userid = userid;
+		this.userRole = userRole;
 	}
 	
 	

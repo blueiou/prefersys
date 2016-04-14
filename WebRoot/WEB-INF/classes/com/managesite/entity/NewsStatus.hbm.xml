@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE hibernate-mapping PUBLIC          
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"          
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+<hibernate-mapping>  
+    <class name="com.managesite.entity.NewsStatus" table="sys_news_veri">  
+        <id name="n_id" >  
+            <generator class="foreign"><param name="property">news</param>
+            </generator>              
+        </id>  
+        <property name="status" length="10" />  
+        <property name="veritime" length="200"> </property>
+        <property name="person" length="10"> </property>
+        <!-- //设置与新闻相同的主键 -->
+      <one-to-one name="news"   class="com.managesite.entity.News"/> 
+    <!--   <many-to-one name="Goods"
+ class="com.entity.Goods"
+ cascade="none"
+ outer-join="auto"
+ update="true"
+ insert="true"
+ access="property"
+ column="good_id"
+ not-null="true"
+  lazy="false"
+></many-to-one> -->
+    </class>  
+</hibernate-mapping>  

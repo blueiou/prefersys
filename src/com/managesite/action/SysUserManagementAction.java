@@ -87,7 +87,7 @@ public void setMap(Map<String, Object> map) {
 	
 	public String  userIssue() {
 		map=new HashMap<String, Object>();
-		reply=sUser.findByMid(request.getParameter("mid"));
+		//reply=sUser.findByMid(request.getParameter("mid"));
 		map.put("reply", reply);
 		return SUCCESS;
 	}

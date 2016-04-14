@@ -1,4 +1,9 @@
 package com.test;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -15,6 +20,8 @@ import com.managesite.dao.impl.SysGoodsDaoImpl;
 import com.managesite.dao.impl.SysNewsDaoImpl;
 import com.managesite.dao.impl.SysTicketDaoImpl;
 import com.managesite.dao.impl.SysUserDaoImpl;
+import com.managesite.dao.impl.UserOperateDaoImpl;
+import com.managesite.db.DbConnect;
 import com.managesite.entity.News;
 import com.managesite.entity.NewsImg;
 import com.managesite.entity.NewsLabel;
@@ -26,6 +33,7 @@ import com.managesite.entity.UserInfo;
 import com.managesite.model.NewsModel;
 import com.managesite.model.OrdersInfo;
 import com.managesite.model.PlayByMid;
+import com.managesite.model.UserInfoModel;
 import com.managesite.service.SysNewsService;
 import com.managesite.service.SysTicketService;
 //类中测试方法 已经注入到spring中的
@@ -41,8 +49,40 @@ public class TestApplication {
 	SysNewsService servic=(SysNewsService) act.getBean("SysNewsBo");
 	SysNewsManageAction sysNewsManageAction=(SysNewsManageAction) act.getBean("SysNewsManageAction");
 	//News news=(News)newsDaoImpl.getEntity("22");
-	System.out.println("查找的实体类为"+newsDaoImpl.getEntity("22").getU_comment().size());
+	//System.out.println("查找的实体类为"+newsDaoImpl.getEntity("22").getU_comment().size());
 	
+	UserOperateDaoImpl userOperateDaoImpl=(UserOperateDaoImpl) act.getBean("UserOperateDaoImpl");
+	String f_nameString="select rolename from roles r where roleid in (select roleid from user_role where userid=?)";
+	Connection con=DbConnect.getConnection();
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	try {
+		ps=con.prepareStatement(f_nameString);
+	    ps.setString(1,"11");
+	    rs=ps.executeQuery();
+	    con.commit();
+	    System.out.println(rs.next());
+	    while (rs.next()) {
+	    	System.out.println("enter");
+			System.out.println(rs.getString(1));
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	finally{
+    DbConnect.closeConnection(rs, ps, con);
+	}
+	
+	/*	String uid="11";
+	String title="shshshshhshs";
+	String des="blank space 无标签";
+	String t_id="5e4ba3e053b6e7a20153b6e7a6250002";
+	String[] imgsString={
+			"/dayday/admin/temp/1345.jpg","/dayday/test/temp/123.jpg"
+	};
+	userOperateDaoImpl.addNews(uid, title, des, t_id,imgsString);;
+*/	
 	
 	/*News news=sysNewsDaoImpl.getNewsById("402881835331481d015331481e870001");
 	Set<NewsImg> imgs=news.getImgs();

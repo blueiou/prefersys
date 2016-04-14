@@ -15,7 +15,7 @@ public class NewsDaoImpl extends BaseDaoImpl<News>{
 	p=super.listPage(hql1, hql2, pageno, pagesize);
 	return p;
 	}
-	//获取详情
+	//前台获取详情
 	public News getEntity(String n_id){
 		return super.getEntity(News.class,n_id);
 	}

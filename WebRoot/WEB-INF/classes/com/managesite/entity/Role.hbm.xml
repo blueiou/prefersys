@@ -12,7 +12,7 @@
         <property name="description" length="250" />  
         <set name="users" table="user_role" inverse="true">  
             <key column="roleid"/>  
-            <many-to-many column="userid" class="com.managesite.entity.User" />  
+            <many-to-many column="userid" class="com.managesite.entity.User" fetch="select"  lazy="false" />  
         </set>  
     </class>  
 </hibernate-mapping>  

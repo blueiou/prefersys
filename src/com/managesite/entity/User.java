@@ -23,7 +23,15 @@ public class User implements Serializable{
 		private Set<News> news;
 		//与用户评价一对多
 		private Set<UserComment> u_comment;
+		//与用户角色一对多
+		private Set<UserRole> userRoles=new HashSet<>();
 		
+		public Set<UserRole> getUserRoles() {
+			return userRoles;
+		}
+		public void setUserRoles(Set<UserRole> userRoles) {
+			this.userRoles = userRoles;
+		}
 		public Set<UserComment> getU_comment() {
 			return u_comment;
 		}
@@ -99,6 +107,10 @@ public class User implements Serializable{
 	         this.roles = roles;  
 	     }  
 	
-	
+	//获取用户角色
+	  public User(Set<Role> roles){
+		  super();
+		  this.roles=roles;
+	  }
 	
 }

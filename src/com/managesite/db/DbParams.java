@@ -2,7 +2,7 @@ package com.managesite.db;
 
 public class DbParams {
 	private static final String driver="com.mysql.jdbc.Driver";
-	private static final String url="jdbc:mysql://localhost:3306/db_movie";
+	private static final String url="jdbc:mysql://localhost:3306/db_managesite?useSSL=false";
 	private static String name="root";
 	private static String password="root321";
 	public static String getName() {

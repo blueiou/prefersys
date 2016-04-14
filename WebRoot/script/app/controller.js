@@ -14,7 +14,6 @@ newsList.query({pageno:$scope.currentPage},function(res){
 	   $scope.msglist();			   
 		   };
   $scope.msglist();
-  
 });
 //********************影片管理
 app.controller('showing',function ($scope,$interval,$http,$log,$uibModal,goodsList){

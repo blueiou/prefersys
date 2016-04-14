@@ -65,7 +65,8 @@ image/bmp,image/jpg,image/jpeg,image/gif,image/png
 </interceptor-ref>
 <interceptor-ref name="NewsPublishStack"></interceptor-ref><!-- 若在自定义的拦截器中配置好了则不用 -->
 <result name="input" >/exception/uploadfail.html</result>
-<result name="success" type="redirect">/error.jsp</result>
+<result name="uploadsuccess" type="redirect">/error.jsp</result>
+<result type="json"> <param name="root">data</param></result>
 </action> 
 
 <!-- just a test -->

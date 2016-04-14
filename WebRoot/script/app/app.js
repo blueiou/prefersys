@@ -31,11 +31,11 @@
 var userapp=angular.module('UserApp',["ui.router",'ngAnimate', 'ui.bootstrap','mv.service','mv.filter','mv.controller']);
 userapp.config(function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise("/OrderIndex");
-	$stateProvider.state('userorder', {
+/*	$stateProvider.state('userorder', {
 	    url: '/OrderIndex',
-	    templateUrl: './mtpls/user/showorder.html',
+	    templateUrl: './mtpls/user/newlist.html',
 	    controller: 'searchOrder'
-	})
+	})*/
 })
 
    

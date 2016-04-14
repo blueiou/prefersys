@@ -51,6 +51,7 @@
  not-null="true"
  lazy="false"
 ></many-to-one>
+<!-- 与标签一多对 --><!--（ps：） 对于新添加的新闻默认为普通标签 -->
 <many-to-one name="labels"
  class="com.managesite.entity.NewsLabel"
  cascade="none"
@@ -59,11 +60,12 @@
  insert="true"
  access="property"
  column="label_id"
- not-null="true"
+ not-null="false" 
  lazy="false"
 ></many-to-one>
+
 <!-- 与图片多对一 -->
-<set name="imgs" table="sys_new_img" cascade="all-delete-orphan" 
+<set name="imgs" table="sys_new_img" cascade="save-update,delete" 
             lazy="false" inverse="true">
             <key column="new_id" /><!-- 确定关联的外键列 -->
             <one-to-many class="com.managesite.entity.NewsImg" />

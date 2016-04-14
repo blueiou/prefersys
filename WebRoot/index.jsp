@@ -76,9 +76,14 @@
                          <form method="post" enctype="multipart/form-data"  action="api/userop/addNews" >         
                                     <label>店名:</label>
                                     <input id="shopname" name="shopname"  type="text" class="form-control" placeholder="标题">
+                                    <label>类型:</label>
+                                     <select name="n_type" id="n_type">
+                                      
+                                     <option value="1">家电数码</option>
+                                     <option value="2">生活用品</option>
+                                     </select><br />
                                       <label for="">优惠简介：</label>
                                     <textarea rows="" cols="" class="form-control" name="content"></textarea>
-                               
                                       <label class="">上传图片:</label>
                                       <span class="form-group">
                    <input id="vailimages" type="file" name="upload" multiple="multiple" multiple class="file" data-overwrite-initial="false" data-min-file-count="1"> 

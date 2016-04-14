@@ -18,11 +18,16 @@ public class MyDate extends Date {
 		return df.format(this);
 	}
 	//获取不包含毫秒的时间
+public String getYMDHMSS(){
+		DateFormat dfDateFormat=new SimpleDateFormat("yyyyMMddHHmmssSSS");
+		return dfDateFormat.format(this);
+	}
 	public String getYMDHMS(){
 		
 		DateFormat dfDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
 		return dfDateFormat.format(this);
 	}
+
 	public String getYMDHM(){
 		DateFormat dFormat=new SimpleDateFormat("yyyyMMddHHmm");
 		return dFormat.format(this);

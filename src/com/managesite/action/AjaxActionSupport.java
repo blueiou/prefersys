@@ -13,7 +13,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class AjaxActionSupport extends ActionSupport implements ServletRequestAware,ServletResponseAware,SessionAware{
 protected HttpServletRequest request;
-protected Map session;
+protected Map<String, Object> session;
 
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
@@ -28,7 +28,7 @@ protected HttpServletResponse response;
 		// TODO Auto-generated method stub
 		
 	}
-	   public void setSession(Map session) {
+	   public void setSession(Map<String, Object> session) {
 	       this.session = session;
 	    }
 
