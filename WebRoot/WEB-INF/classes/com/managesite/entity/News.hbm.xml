@@ -54,7 +54,7 @@
 <!-- 与标签一多对 --><!--（ps：） 对于新添加的新闻默认为普通标签 -->
 <many-to-one name="labels"
  class="com.managesite.entity.NewsLabel"
- cascade="none"
+ cascade="save-update,persist"
  outer-join="auto"
  update="true"
  insert="true"

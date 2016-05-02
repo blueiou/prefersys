@@ -76,7 +76,7 @@ public class NewsAction extends AjaxActionSupport{
 				if(CacheClass.checkPage(pagenoString))  pageno=Integer.parseInt(pagenoString);
 			}
 			if (request.getParameter("symbol")!=null) {
-				String symbol1=request.getParameter("pageno");
+				String symbol1=request.getParameter("symbol");
 				if(CacheClass.checkPage(symbol1))  symbol=Integer.parseInt(symbol1);
 			}
 			page=sNews.findPageList(pageno,pagesize,symbol);

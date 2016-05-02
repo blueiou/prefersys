@@ -1,5 +1,4 @@
 package com.managesite.action;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -15,12 +14,20 @@ import com.managesite.service.SysGoodsService;
 import com.managesite.service.SysUsersService;
 import com.managesite.tools.CacheClass;
 import com.managesite.tools.Functions;
+import com.managesite.tools.SysReceiveData;
 public class SysUserManagementAction extends AjaxActionSupport{
 	private SysUsersService sUser;
    private Object reply=null;
    private Map<String, Object> map;
    private  PublicData publicData;
    private final static int pageSize=5;
+   private SysReceiveData sysRecei;   
+	public SysReceiveData getSysRecei() {
+	return sysRecei;
+}
+public void setSysRecei(SysReceiveData sysRecei) {
+	this.sysRecei = sysRecei;
+}
 	public SysUsersService getsUser() {
 	return sUser;
 }
@@ -66,7 +73,7 @@ public void setMap(Map<String, Object> map) {
 		return ERROR;
 	}
 	//查找用户
-	private String getUsers() {
+	public String getUsers() {
 		System.out.println("进入查询用户信息");
 		// TODO Auto-generated method stub
 		map=new HashMap<String, Object>();
@@ -84,7 +91,16 @@ public void setMap(Map<String, Object> map) {
 		String uid=request.getParameter("uid");
        sUser.delUser(uid);
 	}
-	
+	//增加用户
+	public String saveOrUpdatUser(){
+		map=new HashMap<>();
+		sysRecei.uname=request.getParameter("uname");
+		sysRecei.upawd=request.getParameter("upawd");
+		sysRecei.u_role=request.getParameter("urole");
+		sUser.saveUser(sysRecei);
+	map.put("success", "添加成功");
+		return SUCCESS;
+	}
 	public String  userIssue() {
 		map=new HashMap<String, Object>();
 		//reply=sUser.findByMid(request.getParameter("mid"));
@@ -108,42 +124,6 @@ public void setMap(Map<String, Object> map) {
 		}
 		return SUCCESS;
 	}
-	/*//用户登录
-	public String getUser(){
-		System.out.println("进入登录");
-		 HttpSession session=request.getSession();
-			map=new HashMap<String, Object>();
-			User user=sUser.findUserUnit(request.getParameter("uname"), request.getParameter("upass"));
-			String code=request.getParameter("code");
-			String sescode=(String)session.getAttribute("rand");
-			if (code==null||sescode==null||!code.equals(sescode)) {
-				System.out.println("验证码不正确");
-				map.put("er_msg", "验证码不正确");
-				map.put("success", false);
-				return SUCCESS;
-			}
-			else {
-				System.out.println("else");
-				if (user==null) {
-				map.put("user", null);
-				map.put("er_msg", "用户不存在");
-				map.put("success", false);
-				return SUCCESS;
-			}
-				else if (user!=null) {
-					System.out.println("user not null ");
-					session.setAttribute("uid", user.getUserid());
-					session.setAttribute("uname", user.getUsername());
-					session.setAttribute("urole", user.getRoles());
-					//session.setAttribute("urole", value);
-					map.put("user", user);
-					map.put("success", true);
-					return SUCCESS;
-				}
-			}
-		map.put("user","error");
-			return SUCCESS;
-	}*/
 	public void delOrder(){
 		HttpSession session=request.getSession();
 		String uidString=(String) session.getAttribute("uid");

@@ -1,5 +1,7 @@
 package com.test;
 
+import com.managesite.tools.CacheClass;
+
 public class A {
 	public A(){
 		System.out.println("A3");
@@ -14,11 +16,14 @@ public class A {
 	public static void main(String[] args){
 		
 		System.out.println("2016-02-27 09:55:00.0".substring(11,16));
-		
+		String aaa="0";
+		boolean sss=CacheClass.checkPage(aaa);
+		System.out.println(sss);
 	}
 	public void print() {
 		// TODO Auto-generated method stub
 		System.out.println("A类的你好");
+	
 	}
 }
 class B extends A{

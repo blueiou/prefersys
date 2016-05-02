@@ -51,29 +51,19 @@ public class TestApplication {
 	//News news=(News)newsDaoImpl.getEntity("22");
 	//System.out.println("查找的实体类为"+newsDaoImpl.getEntity("22").getU_comment().size());
 	
-	UserOperateDaoImpl userOperateDaoImpl=(UserOperateDaoImpl) act.getBean("UserOperateDaoImpl");
-	String f_nameString="select rolename from roles r where roleid in (select roleid from user_role where userid=?)";
-	Connection con=DbConnect.getConnection();
-	PreparedStatement ps = null;
-	ResultSet rs = null;
-	try {
-		ps=con.prepareStatement(f_nameString);
-	    ps.setString(1,"11");
-	    rs=ps.executeQuery();
-	    con.commit();
-	    System.out.println(rs.next());
-	    while (rs.next()) {
-	    	System.out.println("enter");
-			System.out.println(rs.getString(1));
-		}
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	finally{
-    DbConnect.closeConnection(rs, ps, con);
-	}
+	/*UserOperateDaoImpl userOperateDaoImpl=(UserOperateDaoImpl) act.getBean("UserOperateDaoImpl");
+	String title="shshshshhshs";
+	String des="blank space 无标签";
+	int t_id=1;
+	String[] imgsString={
+			"/dayday/admin/temp/1345.jpg","/dayday/test/temp/123.jpg"
+	};
+	userOperateDaoImpl.addNews("11", title, des, t_id, imgsString);
+	*/
 	
+	Page page=sysUserDaoImpl.getUsers(1, 2, "");
+	UserInfoModel userInfoModel=(UserInfoModel) page.getNewslist().get(0);
+	System.out.println(userInfoModel.getRoles());
 	/*	String uid="11";
 	String title="shshshshhshs";
 	String des="blank space 无标签";

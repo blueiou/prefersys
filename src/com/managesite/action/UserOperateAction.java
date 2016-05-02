@@ -118,7 +118,7 @@ public void setN_type(String n_type) {
 	public void test(){
 		String title="shshshshhshs";
 		String des="blank space 无标签";
-		String t_id="5e4ba3e053b6e7a20153b6e7a6250002";
+		String t_id=""+1;
 		String[] imgsString={
 				"/dayday/admin/temp/1345.jpg","/dayday/test/temp/123.jpg"
 		};

@@ -15,7 +15,8 @@ public class News implements Serializable{
 	private String title; //新闻标题
 	private int symbol;//新闻标志
 	private String descript; //新闻描述
-	 private String creatTime;
+	 private String creatTime;//创建时间
+	 private  String creatIP;//创建IP
 	 //与新闻审核状态一对一
 	 private NewsStatus newsstatu;
 	//与类别多对一
@@ -29,6 +30,12 @@ public class News implements Serializable{
 	//与评论一对多
 	private Set<UserComment> u_comment;
 	
+	public String getCreatIP() {
+		return creatIP;
+	}
+	public void setCreatIP(String creatIP) {
+		this.creatIP = creatIP;
+	}
 	public Set<UserComment> getU_comment() {
 		return u_comment;
 	}

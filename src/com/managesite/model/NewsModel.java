@@ -7,15 +7,15 @@ import com.managesite.entity.NewsImg;
 import com.managesite.entity.UserComment;
 
 public class NewsModel {
-	public String new_id;
-	public String title; //新闻标题
-	public String auth;  //爆料者
-	public String writer;
-	public String descript; //新闻描述
-	public String imagesurl; //新闻图片路径
-	 public String creatTime; 
-	 public Set<UserComment> userComments;
-	 public int status; //新闻审核状态
+	private String new_id;
+	private String title; //新闻标题
+	private String auth;  //爆料者
+	private String writer;
+	private String descript; //新闻描述
+	private String imagesurl; //新闻图片路径
+	 private String creatTime; 
+	 private Set<UserComment> userComments;
+	 private int status; //新闻审核状态
 
 	 public int getStatus() {
 		return status;

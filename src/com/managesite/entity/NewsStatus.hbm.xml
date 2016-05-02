@@ -11,7 +11,8 @@
         <property name="status" length="10" />  
         <property name="veritime" length="200"> </property>
         <property name="person" length="10"> </property>
-        <!-- //设置与新闻相同的主键 -->
+        <property name="veri_reply" length="150"></property>
+                <!-- //设置与新闻相同的主键 -->
       <one-to-one name="news"   class="com.managesite.entity.News"/> 
     <!--   <many-to-one name="Goods"
  class="com.entity.Goods"

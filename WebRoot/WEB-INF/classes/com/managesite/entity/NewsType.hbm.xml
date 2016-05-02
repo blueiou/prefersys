@@ -6,10 +6,10 @@
 -->
 <hibernate-mapping>
 <class name="com.managesite.entity.NewsType" table="sys_type_info" catalog="db_managesite">
-<id name="type_id" >
-  <column name="type_id">  
-  </column>
-  <generator class="uuid"></generator>
+<id name="type_id" type="java.lang.Integer" column="type_id" unsaved-value="0">
+ <!--  <column name="type_id">  
+  </column> -->
+  <generator class="increment"></generator>
 </id>
 <!-- <property name="stuid" type="java.lang.Integer">
 <column name="stuid" length="20"></column>

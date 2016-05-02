@@ -12,7 +12,9 @@ import com.managesite.model.OrdersInfo;
 import com.managesite.model.PublicData;
 import com.managesite.model.UserInfoModel;
 import com.managesite.tools.CacheClass;
+import com.managesite.tools.Md5;
 import com.managesite.tools.PulginsException;
+import com.managesite.tools.SysReceiveData;
 public class SysUsersService {
 	private SysUserDaoImpl sysUserDaoImpl;
 	public SysUserDaoImpl getSysUserDaoImpl() {
@@ -37,11 +39,13 @@ public class SysUsersService {
 		if (pageno>pagecount) p.setPageno(pagecount);
 		return p;
 	}
+	//用户登录
 	public UserInfoModel findUserUnit(String na,String pa){
 		if (CacheClass.isEmpty(na)||CacheClass.isEmpty(pa)) {
 			new PulginsException("非法参数");
 		}
-		List<String> userlist=sysUserDaoImpl.uLogin2(na, pa);//传入到数据处理层
+		String paString=Md5.getMD5(pa);//密码加密
+		List<String> userlist=sysUserDaoImpl.uLogin2(na, paString);//传入到数据处理层
 		//List<User> userlist=sysUserDaoImpl.uLogin(na, pa);//传入到数据处理层
 		if (userlist.size()==0) {new PulginsException("没有该用户"); return null;}
 		else {
@@ -65,8 +69,7 @@ public class SysUsersService {
 		
 }
 	public PublicData findOrderInfo(String uid){
-		PublicData publicData=null;
-		
+		PublicData publicData=null;		
 		if (!CacheClass.isEmpty(uid)) {
 			publicData=new PublicData();
 			List<OrdersInfo> list=sysUserDaoImpl.searchOrder(uid);
@@ -80,6 +83,12 @@ public class SysUsersService {
 		}
 		return null;
 	}
+	public void saveUser(SysReceiveData sd){
+		sd.uname=Md5.getMD5(sd.uname);
+		sysUserDaoImpl.updateUser(sd);
+		
+	}
+	
 	public void delOrder(String uid,String oid){
 		if (!CacheClass.isEmpty(uid)&&!CacheClass.isEmpty(oid)) {
 			sysUserDaoImpl.del(uid, oid);

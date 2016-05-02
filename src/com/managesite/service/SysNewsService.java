@@ -11,6 +11,7 @@ import com.managesite.model.NewsModel;
 import com.managesite.model.PublicData;
 import com.managesite.tools.CacheClass;
 import com.managesite.tools.PulginsException;
+import com.managesite.tools.SysReceiveData;
 
 public class SysNewsService {
 
@@ -57,7 +58,26 @@ public class SysNewsService {
 		}
 		return null;
 	}*/
-	
+	public NewsModel findNewsById(String id){
+		
+		if (CacheClass.isEmpty(id)) {
+			return null;
+		}
+		else
+		{
+			List<NewsModel> list=sysNewsDaoImpl.getNewsById(id);
+			NewsModel newsmodel=null;
+			if (list.size()!=0) {
+				newsmodel=list.get(0);
+				return newsmodel;
+			}
+			return null;
+		}
+	}
+	//审核新闻 审核通过，无消息，审核不通过，回给用户消息
+	public void updateNewsStatu(SysReceiveData sd){
+		sysNewsDaoImpl.newupdate(sd);
+	}
 	public void test(){
 		System.out.println("SysNewsService");
 	}

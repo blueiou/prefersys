@@ -17,25 +17,14 @@ import com.managesite.entity.User;
 import com.managesite.model.OrdersInfo;
 import com.managesite.model.UserInfoModel;
 import com.managesite.tools.CacheClass;
+import com.managesite.tools.MyDate;
+import com.managesite.tools.SysReceiveData;
 
 import freemarker.cache.StringTemplateLoader;
 
 public class SysUserDaoImpl extends BaseDaoImpl<User>{
 private DbConnect dbConnect;
-	private HibernateTemplate hibernateTemplate;
-/*	public HibernateTemplate getHibernateTemplate() {
-		return hibernateTemplate;
-	}
-	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-		this.hibernateTemplate = hibernateTemplate;
-	}*/
-/*	public List uLogin(String na, String pa){
-		  String f_name= "from User u where u.username=? and u.password=?";  
-			List<User> userlist=getHibernateTemplate().find(f_name, new String[]{na,pa});
-			if (userlist.size()==0) {System.out.println("没有查到到该用户");	return null;}
-			else {User user=userlist.get(0);}
-			return userlist;
-	}*/
+/***********************************************FIND*********/
 //判断用户登录	
 public List<String> uLogin2(String na,String pa){
 		String f_nameString="select u.userid from User u where u.username=? and u.password=?";
@@ -70,6 +59,8 @@ public UserInfoModel uLogin3(String u_id){
 	}
 	return userInfoModel;
 }
+
+//查找管理员全部用户
 	public Page getUsers(int pageno,int pagesize,String stemp){
 		Page p=null;
 		String hql1="select new com.managesite.model.UserInfoModel(n.email,n.username) from User n";
@@ -77,6 +68,30 @@ public UserInfoModel uLogin3(String u_id){
 		p=super.listPage(hql1,hql2,pageno,pagesize);
 		return p;
 	}
+/***********************************************UPDATE*********/
+//增加用户（包含管理员和审核人员）
+public void updateUser(SysReceiveData sd){
+	String dateString=new MyDate().toString();
+	Role role=super.getHibernateTemplate().get(Role.class,sd.u_role);
+    User user=new User();
+    user.setUsername(sd.uname);
+    user.setPassword(sd.upawd);
+    user.getRoles().add(role);
+    super.getHibernateTemplate().saveOrUpdate(user);;
+    //user.setR
+}
+
+
+
+
+
+
+
+//获取model的路径
+public static String getBeanStr(String str){
+ String temp="select new com.managesite.model("+str+")";
+ return temp;
+}
 	public List<OrdersInfo> searchOrder(String uid){
 		String hqlString="select new com.model.OrdersInfo(t.ticket_id,t.play.goods.sysname,t.play.play_time,t.statue) from Ticket t where t.user.userid=?";
 		List<OrdersInfo> orderlList=getHibernateTemplate().find(hqlString,uid);

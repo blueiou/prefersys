@@ -83,15 +83,13 @@ var time=new Date();
 	$scope.time=time;
 	console.log("输出的时间"+time);
 	  $scope.exmaple = exmaple;
-	  console.log("商品ID:"+exmaple);
-	  
+	  console.log("商品ID:"+exmaple);	  
 	  $scope.showtime='asd';
 	 goodsList.query({m:"1520",id:exmaple},function(res){
 		 // goodsList.query({m:"1520"},function(res){
 		  console.log(res);
 		  $scope.goodDescri=res.goodDescri;
-	  });
-	 
+	  });	 
 	 //获取用户评价
 	 usersListG.query({m:"10186",mid:exmaple},function(res){
  $scope.userissue=res.reply;
@@ -190,7 +188,7 @@ app.controller('chooseSeat', function ($scope,$http,$stateParams,tmList) {
 	 }
 	 $scope.search();
 });
-/******************用户管理*/
+/******************管理员管理*/
 //查看订单
 app.controller('searchOrder',function($scope,usersListG){
 	$scope.search=function(){
@@ -211,7 +209,8 @@ app.controller('searchOrder',function($scope,usersListG){
 	$scope.search();
 	
 });
-app.controller('newslist',function($scope,$q,newsList){
+
+app.controller('newslist',function($scope,$q,$interval,$http,$log,$uibModal,newsList){
 	$scope.currentPage=1;
 	$scope.newslist=function(){
 		newsList.query({m:"5041",pageno:$scope.currentPage},function(res){
@@ -233,35 +232,57 @@ app.controller('newslist',function($scope,$q,newsList){
 	
 	$scope.newslist();
 });
-app.controller('MyController',  function($scope, TreeViewService) {
+//左侧、右侧查看新闻
+app.controller('MyController',  function($scope,$interval,$http,$log,$uibModal,TreeViewService,newsList) {
     var service = new TreeViewService;
     $scope.myService = service;
+    //右侧内容
+    //左侧列表
     $scope.myService.nodes = [
-      /*  {
-            id: 1,
-            name: 'first',
-            uiserf:'dayday',
-            children: []
-        },*/
         {
-            id: 1,
+            id:1,
             name: '用户管理',
+            topname:'用户管理',
+            nodename:'查看用户',
             children: [
                 {
                     id: 1,
                     name: '查看用户',
+                    nodename:'查看用户',
                     children: [],
-                      /*  {
-                            id: 20,
-                            name: 'grand child',
-                            children: []
-                        }*/
-                
                 },{
                 	id: 2,
                     name: '新增用户',
+                    nodename:'新增用户',
                     children: []
                 }
+            ]
+            
+        },
+        {
+            id:22,
+            name: '新闻管理',
+           
+            children: [{
+            	id:11,
+            	name:"全部新闻",
+            	children:[]
+            },{
+            	id:22,
+            	name:"未审核新闻",
+            		children:[]
+            }
+           ,{
+        	   id:3,
+        	   name:"添加栏目",
+        	   children:[]
+           }
+           ,{
+        	   id:4,
+        	   name:"添加标签",
+        	   children:[]
+           }
+            
             ]
         }
     ];
@@ -274,7 +295,23 @@ app.controller('MyController',  function($scope, TreeViewService) {
         service.selectedNode = undefined;
     }
     
-    
+    $scope.newslist=function(){
+		newsList.query({symbol:"0",pageno:$scope.currentPage},function(res){			
+			 $scope.list=res.msglist;
+			 console.log('没有记录？？');
+			 console.log($scope.list);
+			 //删除某行记录   因为是集合 所以传入一个对象 在所查询出来的数据中进行检索
+			 $scope.delnew=function(index){
+				 var index=$scope.list.newslist.indexOf(index);
+				 $scope.list.newslist.splice((index),1);				 
+				}
+		})
+	}
+    $scope.setPage = function (pageNo) {
+	    $scope.currentPage = pageNo;		     
+	   $scope.newslist();			   
+		   };
+    $scope.newslist();
 });
 
 

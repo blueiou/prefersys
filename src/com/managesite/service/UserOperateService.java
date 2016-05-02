@@ -28,7 +28,7 @@ public void saveNews(String uid,String title,String des,String t_id,String[] img
 		return;
 	}
 	else {
-		userOperateDaoImpl.addNews(uid, title, des, t_id, imgs);
+		userOperateDaoImpl.addNews(uid, title, des,Integer.parseInt(t_id), imgs);
 	}
 }
 

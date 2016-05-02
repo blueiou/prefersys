@@ -16,6 +16,13 @@ public class UserInfoModel {
 	public UserInfo userInfo;
 	public Set<String> userRole=new HashSet<>();
 	
+	public Set<Role> roles=new HashSet<>();
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 	public Set<String> getUserRole() {
 		return userRole;
 	}
@@ -75,6 +82,12 @@ public class UserInfoModel {
 	public UserInfoModel(String userid, Set<String> userRole) {
 		super();
 		this.userid = userid;
+		this.userRole = userRole;
+	}
+	public UserInfoModel(String email, String username, Set<String> userRole) {
+		super();
+		this.email = email;
+		this.username = username;
 		this.userRole = userRole;
 	}
 	

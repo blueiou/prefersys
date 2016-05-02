@@ -54,9 +54,10 @@
     <tx:method name="find*" propagation="NOT_SUPPORTED" read-only="true" />
 </tx:attributes>
 </tx:advice>
-<!-- 实体类 -->
-<bean id="recei" class="com.managesite.tools.ReceiveData">
+<!-- 实体类 接收后台的数据-->
+<bean id="recei" class="com.managesite.tools.ReceiveData">	
 </bean>
+<bean id="SysRecei" class="com.managesite.tools.SysReceiveData"/>
 	<!-- 配置数据持久层 --><!-- 公共的继承hibernateTemplate的dao类 -->
 	<!-- 基础dao注入hibernateTemplate -->
 	<bean id="BaseDaoImpl" class="com.managesite.dao.impl.BaseDaoImpl">
@@ -90,11 +91,13 @@
 <!-- action 类--><!-- 配置控制层 -->
 <bean id="SysUserManagementAction" class="com.managesite.action.SysUserManagementAction" scope="prototype">
 <property name="sUser" ref="SysUserBo"></property>
+<property name="sysRecei" ref="SysRecei"></property>
 </bean>
 <bean id="UserAction" class="com.managesite.action.UserAction" scope="prototype">
 <property name="loginUser" ref="SysUserBo"></property>
 </bean>
 <bean id="SysNewsManageAction" class="com.managesite.action.SysNewsManageAction" scope="prototype">
+<property name="sysRecei" ref="SysRecei"></property>
 <property name="sNewsManage" ref="SysNewsBo"></property>
 </bean>
 <bean id="NewsAction" class="com.managesite.action.NewsAction" scope="prototype">

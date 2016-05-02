@@ -12,6 +12,14 @@ public class NewsStatus implements Serializable{
 	private String person;//审核人员
 	private String question;//原因
 	private String veritime;
+	private String veri_reply;
+	
+	public String getVeri_reply() {
+		return veri_reply;
+	}
+	public void setVeri_reply(String veri_reply) {
+		this.veri_reply = veri_reply;
+	}
 	//与新闻一对一
 	private News news;
 	

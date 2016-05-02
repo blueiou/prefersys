@@ -10,9 +10,11 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import com.managesite.dao.BaseDao;
 import com.managesite.entity.NewsLabel;
+import com.managesite.entity.NewsStatus;
 import com.managesite.entity.NewsType;
 import com.managesite.entity.Page;
 import com.managesite.entity.User;
+import com.managesite.model.NewsModel;
 public class BaseDaoImpl<T> implements BaseDao<T>{
 private HibernateTemplate hibernateTemplate;
 public HibernateTemplate getHibernateTemplate() {
@@ -88,10 +90,9 @@ public Page listPage(final String hql1, String hql2, int pageno, int pagesize) {
 		pagecount=rowcount/pagesize+1;
 	}
 	List slist=query.list();
-	 if (p==null) 
-		 {
-		 p=new Page(pagecount,pageno, pagesize, slist,rowcount);
-		 }
+
+	 p=new Page(pagecount,pageno, pagesize, slist,rowcount);
+
 	return p;
 }
 public Query getQuery(final String hql){
@@ -145,7 +146,7 @@ public List<T> getlist(String hql) {
 public T getEntity(Class<T> t,String id){
 	return this.hibernateTemplate.get(t, id);
 }
-public NewsType getTypeEntity(Class<NewsType> class2, String t_id) {
+public NewsType getTypeEntity(Class<NewsType> class2, int t_id) {
 	// TODO Auto-generated method stub
 	return this.hibernateTemplate.get(class2, t_id);
 }
@@ -153,5 +154,9 @@ public NewsType getTypeEntity(Class<NewsType> class2, String t_id) {
 public NewsLabel getLabelEntity(Class<NewsLabel> class2, String string) {
 	// TODO Auto-generated method stub
 	return this.hibernateTemplate.get(class2, string);
+}
+
+public NewsStatus getNewsStatus(Class<NewsStatus> class1,String str){
+	return this.hibernateTemplate.get(class1, str);
 }
 }

@@ -6,23 +6,16 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
 import javax.jws.soap.SOAPBinding.Use;
 import javax.management.Query;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;  
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-
-
-
-
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
-
 import com.managesite.dao.impl.PagingDaoImpl;
 import com.managesite.dao.impl.SysUserDaoImpl;
 import com.managesite.db.DbConnect;
@@ -56,6 +49,10 @@ CopyOfUserTest cy=new CopyOfUserTest();
 System.out.print(CheckId.checkId(m));
     Session session=cy.getSession();
 Transaction transaction=session.beginTransaction();
+NewsType types=new NewsType();
+types.setType("jiadain");
+session.save(types);
+transaction.commit();
 /**增加用户评价*****/
 
 /*UserComment userComment=new UserComment();
@@ -63,8 +60,8 @@ userComment.setComment_content("很值得，希望卖家多多举行该类活动
 userComment.setUsers((User)session.get(User.class,"11"));
 userComment.setNews((News)session.get(News.class, "22"));;
 session.save(userComment);
-transaction.commit();
-*//**新增一条新闻并且显示审核状态*/
+transaction.commit();*/
+//**新增一条新闻并且显示审核状态*/
 /*
 MyDate date=new MyDate();
 News news=new News();

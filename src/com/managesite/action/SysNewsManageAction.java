@@ -8,6 +8,7 @@ import com.managesite.model.NewsModel;
 import com.managesite.service.SysNewsService;
 import com.managesite.tools.CacheClass;
 import com.managesite.tools.Functions;
+import com.managesite.tools.SysReceiveData;
 
 public class SysNewsManageAction extends AjaxActionSupport{
     private String new_id;//新闻ID
@@ -15,7 +16,16 @@ public class SysNewsManageAction extends AjaxActionSupport{
 	private Map<String, Object> dataMap;
 	private Page page;
  private static  int pagesize=5;
- 
+   private SysReceiveData sysRecei;
+   
+	public SysReceiveData getSysRecei() {
+	return sysRecei;
+}
+
+public void setSysRecei(SysReceiveData sysRecei) {
+	this.sysRecei = sysRecei;
+}
+
 	public String getNew_id() {
 	return new_id;
 }
@@ -76,6 +86,7 @@ public void setNew_id(String new_id) {
 		}
 		return SUCCESS;
 	}
+	//public String 
 	//获取普通新闻详细信息
 	/*public String normal_new(){
 		if (dataMap==null)  dataMap=new HashMap<String, Object>();

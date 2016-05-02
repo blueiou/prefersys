@@ -14,6 +14,7 @@
 <property name="label" type="java.lang.String">
 <column name="label" length="50"></column>
 </property>
+<!-- cascade="all-delete-orphan" -->
 <set name="news" table="sys_news" cascade="all-delete-orphan" 
             lazy="true" inverse="true">
             <key column="label_id" /><!-- 确定关联的外键列 -->

@@ -35,8 +35,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <input type="text" value="" id="clock" />
          </div>
         </div>         
-                        <!-- 左侧 -->
-                        <div class="row" style="margin-top: 40px;" ng-controller="MyController">
+<!-- 左侧 -->
+<div class="row" style="margin-top: 40px;" ng-controller="MyController">
         <div class="col-md-2" >
         <div class="well">
         <h4>菜单管理</h4>
@@ -51,16 +51,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
                         <div class="col-md-10" >
    <div class="well">
-   
+  <!-- 用户管理 -->
    <div ng-if="myService.selectedNode.id==1">
-        用户管理>>{{myService.selectedNode.name}}
+        用户管理>>{{myService.selectedNode.nodename}}
    <hr> 
    
    </div>
-   <div ng-if="myService.selectedNode.id==2">
+   <div ng-if="myService.selectedNode.name=='新增用户'">
       用户管理>>新增用户
    <hr>
    </div>
+   <!-- 新闻管理 -->
+    <div ng-if="myService.selectedNode.name=='全部新闻'">
+      新闻管理>>全部新闻
+   <hr>
+   </div>
+    <div ng-if="myService.selectedNode.name=='未审核新闻'">
+      新闻管理>>未审核新闻
+     <table class="table">
+  
+     <th>新闻标题</th>
+     <th>新闻内容</th>
+     <th>爆料人</th>
+     <th>时间</th>
+        <th>IP</th>
+     <th>操作</th>
+     
+     <tr ng-repeat='o in list.newslist'>
+     	
+     	<td>{{o.title}}</td>
+     	<td>{{o.descript}}</td>
+     	<td>{{o.writer}}</td>
+     	<td>{{o.creatTime}}</td>
+     	<td></td>
+     	<td><button class="btn btn-success" ng-click=''>查看</button>|<button class="btn btn-danger" ng-click=''>不通过</button>|<button class="btn btn-defaut" ng-click='delnew(o)'>删除</button></td>
+   
+     </tr>
+     
+     </table> 
+     <uib-pagination ng-click="setPage(bigCurrentPage)" total-items="list.pagecount*10" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" num-pages="numPages"></uib-pagination>
+   <hr>
+   </div>
+   <!-- 栏目管理 -->
+
                    <!--  <uib-tabset justified="true" >
                            <uib-tab heading="查看新闻" class="uib-tab ng-isolate-scope" >
                            <div style="margin-top:30px;" ng-controller="newslist">
@@ -92,7 +125,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          </div>
    </div>
    </div><!-- EDN container -->
- <div  ng-controller="MyController">
+   <!-- 测试树形结构 -->
+<!--  <div  ng-controller="MyController">
         <hr />
         <h1>树形结构菜单</h1>
 <hr />
@@ -107,7 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     {{myService.selectedNode.id}}</p><br />
 
 <tree-view tree-service="myService" node-label="name" item-class="pull-left" item-ng-include=""></tree-view>
- </div>    
+ </div>    --> 
 <hr />
 
     <script>

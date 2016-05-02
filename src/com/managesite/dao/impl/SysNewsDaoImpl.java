@@ -18,9 +18,11 @@ import com.managesite.entity.Goods;
 import com.managesite.entity.News;
 import com.managesite.entity.NewsImg;
 import com.managesite.entity.NewsLabel;
+import com.managesite.entity.NewsStatus;
 import com.managesite.entity.Page;
 import com.managesite.model.NewsModel;
-
+import com.managesite.tools.SysReceiveData;
+@SuppressWarnings("hiding")
 public class SysNewsDaoImpl<T> extends BaseDaoImpl<T>{
 private HibernateTemplate hibernateTemplate;
 public HibernateTemplate getHibernateTemplate() {
@@ -29,12 +31,25 @@ public HibernateTemplate getHibernateTemplate() {
 public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 	this.hibernateTemplate = hibernateTemplate;
 }
+/**************************************************FIND*************************************/
+
+
 //获取新闻类型
 public List<NewsLabel> getNewsLabel(){
 	List<NewsLabel> newsLabels=this.hibernateTemplate.find("select new com.managesite.model.NewsLabelModel(n.label_id,n.label) from NewsLabel n");
 	return newsLabels;
 }
-/* 获取新闻类型下的某列新闻
+/**获取全部的爆料信息
+*/
+public Page getAllList(SysReceiveData sd){
+	Page p=null;
+	String hql1="select new com.managesite.model.NewsModel(n.new_id,n.title,n.user.username,n.descript,n.creatTime) from News n";
+	String hql2="select count(*) from NewsStatus";
+	p=super.listPage(hql1, hql2, sd.pageno, sd.pagesize);	
+    return p;
+}
+
+/** 获取新闻类型下的某列新闻
  * @param stemp:新闻归类 0:未审核 1:审核不通过 2:审核成功
  */
 public Page getPageList(int pageno ,int pagesize,int temp){
@@ -42,32 +57,7 @@ public Page getPageList(int pageno ,int pagesize,int temp){
 	System.out.println("使用Query分页");
 	String hql1="select new com.managesite.model.NewsModel(n.new_id,n.title,n.user.username,n.descript,n.creatTime) from News n where n.newsstatu.status='"+"'";
 	String hql2="select count(*) from NewsStatus where status="+temp;
-p=super.listPage(hql1, hql2, pageno, pagesize);
-	/*Query query=(Query) this.getHibernateTemplate().execute(new HibernateCallback<Object>(){
-		@Override
-		public Object doInHibernate(Session session)
-				throws HibernateException, SQLException {
-			Query q=(Query) session.createQuery("select new com.managesite.model.NewsModel(n.new_id,n.title,n.user.username) from News n where n.labels.label_id='"+label_id+"' and n.symbol="+temp);
-			return q;
-		}
-	}
-	);
-	query.setFirstResult((pageno - 1) * pagesize);
-	query.setMaxResults(pagesize);
-	int rowcount=getCount(temp,label_id);
-	int pagecount = 0;
-	if(rowcount%pagesize==0){
-		pagecount=rowcount/pagesize;
-	}
-	else if(rowcount%pagesize!=0)
-	{
-		pagecount=rowcount/pagesize+1;
-	}
-	List slist=query.list();
-	 if (p==null) 
-		 {
-		 p=new Page(pagecount,pageno, pagesize, slist,rowcount);
-		 }*/
+    p=super.listPage(hql1, hql2, pageno, pagesize);
 	return p;
 }
 //获取总行数
@@ -78,13 +68,14 @@ public  int getCount(int temp,String label_id){
 	  return ii;
 }
 //根据新闻ID查询其详细信息
-public NewsModel getNewsById(String id) {
-	News news=(News) getForeignkey(News.class, id);
-	NewsModel model=getNewsModel(news);
+public List<NewsModel> getNewsById(String id) {
+	//News news=(News) getForeignkey(News.class, id);
+    String hql=getBeanStr()+"NewsModel(n.new_id,n.title,n.user.username) from News n where n.new_id="+id;
+	List<NewsModel> model=this.getHibernateTemplate().find(hql);
 	return model;
 }
 //获取新闻图片
-public NewsModel getNewsModel(News news){
+/*public NewsModel getNewsModel(News news){
 	NewsModel newsModel=new NewsModel();
 	newsModel.setNew_id(news.getNew_id());
 	newsModel.setTitle(news.getTitle());
@@ -98,8 +89,22 @@ public NewsModel getNewsModel(News news){
 	}
 	newsModel.setImgs(newsimg);
 	return newsModel;
+}*/
+/**
+* 获取具体实体类的字符串
+*/
+public static String getBeanStr(){
+ String temp="select new com.managesite.model.";
+ return temp;
 }
-
+/**************************************************UPDATE*************************************/
+//修改新闻审核状态
+public void newupdate(SysReceiveData sd){
+    NewsStatus newsstatu=getNewsStatus(NewsStatus.class, sd.n_id);
+    newsstatu.setPerson(sd.person);
+    newsstatu.setStatus(sd.n_statu);
+	this.getHibernateTemplate().saveOrUpdate(newsstatu);
+}
 
 //获取缓存中的实体类信息
 public Object getForeignkey(final Class arg,final String id){

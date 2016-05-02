@@ -32,6 +32,7 @@
 
 </action>
 <!-- 分割线 -->
+<!-- 后台 -->
 <action name="api/manage/*" class="SysNewsManageAction" method="{1}">
 <result type="json">
 <param name="root">dataMap</param>
@@ -40,6 +41,12 @@
 </action>
 <action name="api/sysuser" class="SysUserManagementAction">
 <result type="json"> <param name="root">map</param></result>
+<result name="error" type="redirect">error.jsp</result>
+</action>
+<!-- user add 2 -->
+<action name="api/sysusers/*" class="SysUserManagementAction" method="{1}">
+<result type="json" > <param name="root">map</param></result>
+
 <result name="error" type="redirect">error.jsp</result>
 </action>
 <!-- 前端################################## -->
