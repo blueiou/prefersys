@@ -48,6 +48,7 @@ public void addNews(String uid,String title,String des,int t_id,String[] imgs){
     	img.setNews(news1);//再在多的一方添加一的一方
     	System.out.println(news1.getNew_id());
 	}
+    news1.setPreImg(imgs[0]);
     NewsStatus newsStatus=new NewsStatus();
     newsStatus.setStatus(0);
     newsStatus.setNews(news1);

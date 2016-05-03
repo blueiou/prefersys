@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          </div>
         </div>         
 <!-- 左侧 -->
-<div class="row" style="margin-top: 40px;" ng-controller="MyController">
+<div class="row" style="margin-top: 40px;" ng-controller="adminctr">
         <div class="col-md-2" >
         <div class="well">
         <h4>菜单管理</h4>
@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      	<td>{{o.writer}}</td>
      	<td>{{o.creatTime}}</td>
      	<td></td>
-     	<td><button class="btn btn-success" ng-click=''>查看</button>|<button class="btn btn-danger" ng-click=''>不通过</button>|<button class="btn btn-defaut" ng-click='delnew(o)'>删除</button></td>
+     	<td><button class="btn btn-success" ng-click='open(o.new_id)'>查看</button>|<button class="btn btn-danger" ng-click=''>不通过</button>|<button class="btn btn-defaut" ng-click='delnew(o)'>删除</button></td>
    
      </tr>
      

@@ -85,13 +85,22 @@ public class NewsAction extends AjaxActionSupport{
 			dataMap.put("success", true);
 			return SUCCESS;
 		}
-	//获取详情信息
+	//前端获取详情信息
 	public String detail(){
 		dataMap=new HashMap<>();
 		String id=request.getParameter("p");
 		news=sNews.findUnique(id);
 		//dataMap.put("data", news);
 		return "detail";
+		
+	}
+	//后端获取详情信息
+	public String admDetail(){
+		dataMap=new HashMap<>();
+		String id=request.getParameter("p");
+		news=sNews.findUnique(id);
+		dataMap.put("data", news);
+		return SUCCESS;
 		
 	}
 	//

@@ -1,10 +1,10 @@
 var services = angular.module('mv.service', ['ngResource']);
 
-services.factory('goodsList', ['$resource', function ($resource) {
+/*services.factory('goodsList', ['$resource', function ($resource) {
     return $resource('allist.action', {}, {
         query: {
             method: 'GET',
-            /*params:{pageno:"",m:"",id:"",playTime:""},*/
+            params:{pageno:"",m:"",id:"",playTime:""},
             isArray: false,
             url:'allist.action',
         },
@@ -14,7 +14,17 @@ services.factory('goodsList', ['$resource', function ($resource) {
         	isArray:false,
         }
     });
-}]);
+}]);*/
+services.factory('sysNewsList',['$resource',function($resource){
+	return $resource('api/manage',{},{
+		query:{
+			method:'GET',
+			isArray:false,
+			url:'api/manage',
+		}
+	})
+}])
+
 services.factory('newsList', ['$resource', function ($resource) {
     return $resource('api/news', {}, {
         query: {
@@ -45,7 +55,7 @@ services.factory('usersListG',['$resource',function($resource){
 	});
 	
 }]);
-
+//树形结构
 services.factory('TreeViewService', function () {
     function TreeViewService() {
         var that = this;
@@ -79,7 +89,7 @@ services.factory('TreeViewService', function () {
     return TreeViewService;
 });
 
-//票务管理
+/*//票务管理
 services.factory('tmList',['$resource',function($resource){
 	return $resource('tm.action',{},{
 		query:{
@@ -90,7 +100,7 @@ services.factory('tmList',['$resource',function($resource){
 	
 	})
 	
-}]);
+}]);*/
 services.factory('smv',function($resource)
 		
 		{

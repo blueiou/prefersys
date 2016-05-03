@@ -13,7 +13,7 @@ public class News implements Serializable{
 
 	private String new_id;
 	private String title; //新闻标题
-	private int symbol;//新闻标志
+	private String preImg;   //预览图
 	private String descript; //新闻描述
 	 private String creatTime;//创建时间
 	 private  String creatIP;//创建IP
@@ -26,7 +26,7 @@ public class News implements Serializable{
 	//与图片1对多
 	private Set<NewsImg> imgs=new HashSet();
 	//与新闻性质多对1
-	private NewsLabel labels;
+	private NewsLabel labels;//新闻标签
 	//与评论一对多
 	private Set<UserComment> u_comment;
 	
@@ -54,11 +54,12 @@ public class News implements Serializable{
 	public void setLabels(NewsLabel labels) {
 		this.labels = labels;
 	}
-	public int getSymbol() {
-		return symbol;
+	
+	public String getPreImg() {
+		return preImg;
 	}
-	public void setSymbol(int symbol) {
-		this.symbol = symbol;
+	public void setPreImg(String preImg) {
+		this.preImg = preImg;
 	}
 	public Set<NewsImg> getImgs() {
 		return imgs;

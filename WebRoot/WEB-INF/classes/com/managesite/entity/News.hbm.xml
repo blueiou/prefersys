@@ -17,8 +17,8 @@
 <property name="title" type="java.lang.String">
 <column name="title" length="50"></column>
 </property>
-<property name="symbol" type="java.lang.Integer">
-<column name="symbol" length="11"></column>
+<property name="preImg" type="java.lang.String">
+<column name="preImg" length="50"></column>
 </property>
 <property name="descript" type="java.lang.String">
 <column name="descript" length="255"></column>
@@ -28,6 +28,9 @@
 <column name="creatTime" length="100"></column>
 </property>
 
+<property name="creatIP" type="java.lang.String">
+<column name="creatIP" length="35"></column>
+</property>
 <!-- 其中的name要在News实体类中为NewsType的一个实例对象 -->
 <many-to-one name="type"
  class="com.managesite.entity.NewsType"

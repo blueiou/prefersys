@@ -16,15 +16,15 @@ newsList.query({pageno:$scope.currentPage},function(res){
   $scope.msglist();
 });
 //********************影片管理
-app.controller('showing',function ($scope,$interval,$http,$log,$uibModal,goodsList){
+/*app.controller('showing',function ($scope,$interval,$http,$log,$uibModal,goodsList){
 		//传入当前的页码到后台
 	$scope.currentPage=1;
 		   //在还没触发setPage()函数时候pageno=1
-		 /* $http.get("smvlist.action").success( function(response) {
+		  $http.get("smvlist.action").success( function(response) {
 				  console.log(response);			                         		
 				  $scope.smvlist = response.smvlist;				                       				                       
 			                        //因为其是按照每页十条记录显示的，所以先取出总页数 再*10得到bigTotalItems
-			  });*/
+			  });
 	     // var pageNo=$scope.currentPage;
 		   $scope.search = function (){
 			   goodsList.query({pageno:$scope.currentPage,m:"1510"},function(res){
@@ -76,25 +76,25 @@ app.controller('prepara',function ($scope,$interval,$http,goodsList){
 				   $scope.search();			   
 					   };
 			   $scope.search();
-	   });
+	   });*/
 //商品详情页
-app.controller('GoodsInstance', function($scope, $uibModalInstance, exmaple,goodsList,usersListG) {
+app.controller('GoodsInstance', function($scope, $uibModalInstance,exmaple) {
 var time=new Date();
 	$scope.time=time;
 	console.log("输出的时间"+time);
 	  $scope.exmaple = exmaple;
 	  console.log("商品ID:"+exmaple);	  
 	  $scope.showtime='asd';
-	 goodsList.query({m:"1520",id:exmaple},function(res){
+/*	 goodsList.query({m:"1520",id:exmaple},function(res){
 		 // goodsList.query({m:"1520"},function(res){
 		  console.log(res);
 		  $scope.goodDescri=res.goodDescri;
-	  });	 
+	  });*/	 
 	 //获取用户评价
-	 usersListG.query({m:"10186",mid:exmaple},function(res){
+/*	 usersListG.query({m:"10186",mid:exmaple},function(res){
  $scope.userissue=res.reply;
  console.log(res);
-	 });
+	 });*/
 	  $scope.ok = function () {
 		    $uibModalInstance.close($scope.selected.item);
 		  };
@@ -102,22 +102,8 @@ var time=new Date();
 		    $uibModalInstance.dismiss('cancel');
 		  };
 	});
-//放映时刻表
-app.controller('playtime',function($scope,$interval,$http,goodsList){
-	var time=new Date();
-	console.log(time);
-	$scope.search=function(){
-		goodsList.query({m:"1525",playTime:time},function(res){
-			console.log(res);
-			$scope.list=res.reply;
-		});
-	};
-	$scope.search();
-});
 
 //*****************用户管理
-
-
 app.controller('ulogin',function($scope,$interval,$http,usersListG){
 	$scope.login=function(){
 		usersListG.query({uname:"",pass:""},function(res)
@@ -131,9 +117,9 @@ app.controller('ulogin',function($scope,$interval,$http,usersListG){
 });
 /*******************订单管理*/
 //座位选择                                                                                              $interval
-app.controller('chooseSeat', function ($scope,$http,$stateParams,tmList) {
-	/*$scope.room="hao";
-	$scope.time;*/
+/*app.controller('chooseSeat', function ($scope,$http,$stateParams,tmList) {
+	$scope.room="hao";
+	$scope.time;
 	$scope.playid=$stateParams.id;
 	var room=$stateParams.room;
 	var time=$stateParams.time.substring(0,19);
@@ -187,29 +173,8 @@ app.controller('chooseSeat', function ($scope,$http,$stateParams,tmList) {
 	
 	 }
 	 $scope.search();
-});
+});*/
 /******************管理员管理*/
-//查看订单
-app.controller('searchOrder',function($scope,usersListG){
-	$scope.search=function(){
-	usersListG.query({m:200},function(res){
-		//$scope.list=res.data;
-		$scope.list=res.data;
-		$scope.del=function(oid){
-			usersListG.update({m:"250",oid:oid},function(){
-				console.log(oid);
-				var index=$scope.list.ordersInfo.indexOf(oid);
-				console.log(index);
-				$scope.list.ordersInfo.splice(index,1);
-			});
-		};
-		
-	});
-	}
-	$scope.search();
-	
-});
-
 app.controller('newslist',function($scope,$q,$interval,$http,$log,$uibModal,newsList){
 	$scope.currentPage=1;
 	$scope.newslist=function(){
@@ -233,10 +198,10 @@ app.controller('newslist',function($scope,$q,$interval,$http,$log,$uibModal,news
 	$scope.newslist();
 });
 //左侧、右侧查看新闻
-app.controller('MyController',  function($scope,$interval,$http,$log,$uibModal,TreeViewService,newsList) {
+app.controller('adminctr',  function($scope,$interval,$http,$log,$uibModal,TreeViewService,newsList) {
     var service = new TreeViewService;
     $scope.myService = service;
-    //右侧内容
+
     //左侧列表
     $scope.myService.nodes = [
         {
@@ -294,7 +259,7 @@ app.controller('MyController',  function($scope,$interval,$http,$log,$uibModal,T
     $scope.unselect = function() {
         service.selectedNode = undefined;
     }
-    
+    //右侧内容 
     $scope.newslist=function(){
 		newsList.query({symbol:"0",pageno:$scope.currentPage},function(res){			
 			 $scope.list=res.msglist;
@@ -312,6 +277,32 @@ app.controller('MyController',  function($scope,$interval,$http,$log,$uibModal,T
 	   $scope.newslist();			   
 		   };
     $scope.newslist();
+  //详情
+	   $scope.animationsEnabled = true;
+		  $scope.open = function(exmaple) {
+			  console.log("输出值为：");
+			  console.log(exmaple);
+		    var modalInstance = $uibModal.open({
+		      animation: $scope.animationsEnabled,
+		      templateUrl: './mtpls/admin/updateNews.html',
+		      controller: 'GoodsInstance',
+		      size: 'lg',
+		      resolve: {
+		      exmaple: function() {
+		          return exmaple;
+		        }
+		      }
+		    });
+		    modalInstance.result.then(function() {
+		    }, function() {
+		    	//$scope.search();
+		      console.log("打印：");
+		      //console.log(d);
+		    });
+		  };
+		  $scope.toggleAnimation = function() {
+		    $scope.animationsEnabled = !$scope.animationsEnabled;
+		  };
 });
 
 

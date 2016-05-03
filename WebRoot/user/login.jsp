@@ -117,7 +117,9 @@ body {
 			 res = result.user.roles; 
 			 var str="administrator";
 			 var str2=res[0].rolename; */
+			 var resul=jQuery.parseJSON(result);
 			var res=result.success;
+			alert(resul.er_msg);
 if(!res.success) {
 				 alert(result.er_msg);
 			 } 

@@ -86,13 +86,14 @@ public class NewsModel {
 	}
 	//查看信息
 	public NewsModel(String new_id, String title, String writer,
-			String descript, String creatTime) {
+			String descript, String creatTime,String imagesurl) {
 		super();
 		this.new_id = new_id;
 		this.title = title;
 		this.writer = writer;
 		this.descript = descript;
 		this.creatTime = creatTime;
+		this.imagesurl=imagesurl;
 	}
 	 //用户查看审核状态
 	public NewsModel(String title, String creatTime,
