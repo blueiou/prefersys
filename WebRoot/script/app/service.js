@@ -1,5 +1,13 @@
 var services = angular.module('mv.service', ['ngResource']);
-
+services.factory('useroper',['$resource',function($resource){
+	return $resource('api/user',{},{
+		login:{
+			method:'GET',
+			isArray:false,
+			url:'api/user/getUser'
+		}
+	})
+}])
 /*services.factory('goodsList', ['$resource', function ($resource) {
     return $resource('allist.action', {}, {
         query: {

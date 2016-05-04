@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="user/userinfo.jsp" target="" onclick="" class="glyphicon glyphicon-shopping-cart">个人中心</a>
                     </li> 
                     <li>
-                       <a href="">退出</a>
+                       <a href="api/user/loginOut">退出</a>
                     </li> 
                     
                       <%} %>                                                         

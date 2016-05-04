@@ -116,6 +116,15 @@ public class UserAction extends AjaxActionSupport{
 		map.put("user","error");
 			return SUCCESS;
 	}
+	public void loginOut() throws IOException{
+		HttpSession session=request.getSession();
+		session.removeAttribute("uname");
+		session.removeAttribute("uid");
+		session.removeAttribute("urole");
+		response.sendRedirect("../../index.jsp");
+		/*session*/
+	}
+	
 	//用户添加优惠信息
 	public String addNews() throws IOException{
 		String pathString=ServletActionContext.getServletContext().getRealPath("/temp/imgs");

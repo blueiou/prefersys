@@ -15,6 +15,21 @@ newsList.query({pageno:$scope.currentPage},function(res){
 		   };
   $scope.msglist();
 });
+//用户登录操作
+app.controller('userop',function($scope,useroper){
+	$scope.code='';
+	$scope.uname='';
+	$scope.upass='';
+	//登录
+	$scope.login=function(){
+		useroper.login({uname:$scope.uname,upass:$scope.upass,code:$scope.code},function(res){
+			if(!res.success) alert(res.er_msg);
+			if(res.success) window.location.href='index.jsp';
+		})
+		
+	}
+	
+})
 //********************影片管理
 /*app.controller('showing',function ($scope,$interval,$http,$log,$uibModal,goodsList){
 		//传入当前的页码到后台

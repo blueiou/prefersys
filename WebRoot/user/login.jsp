@@ -32,7 +32,7 @@ body {
   }
 </style>
   </head>
-  <body>
+  <body ng-app="IndexApp">
   <div class="col-md-8 col-md-offset-2">
   <button class="btn btn-primary" >Default</button>
   <button class="btn btn-fill btn-primary">Primary</button>
@@ -64,14 +64,13 @@ body {
                         <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
                             <div class="register-card">
                                 <h3 class="title">Welcome</h3>
-                                <form class="register-form" >
-                                
+                                <form class="register-form" ng-controller='userop'>  
                                     <label>Email</label>
-                                    <input id="uname" name="uname"  type="text" class="form-control" placeholder="用户名">
+                                    <input id="uname" name="uname" ng-model='uname'  type="text" class="form-control" placeholder="用户名">
                                     <label>Password</label>
-                                    <input id="upass" name="upass"  type="password" class="form-control" placeholder="密码">
+                                    <input id="upass" name="upass" ng-model='upass'  type="password" class="form-control" placeholder="密码">
                          <!--  <label style="width:70px; height:25px; float: left;margin-top: 14px;">验证码:</label>  -->        								
-									<input id="code" type="text"
+									<input id="code" type="text" ng-model='code'
 									name="code" maxlength="4" 
 									onblur=""
 										class="form-control"
@@ -81,7 +80,7 @@ body {
 											onclick="this.src='admin/checkCode.jsp?'+ Math.random(); "
 											style="cursor: pointer;" />
 									</div>
-                                    <button class="btn btn-danger btn-block" onclick="loginSubmit()">登录</button>
+                                    <button class="btn btn-danger btn-block" ng-click='login()'>登录</button>
                                 </form>
                                 <div class="forgot">
                                     <a href="#" class="btn btn-simple btn-danger">Forgot password?</a>
@@ -101,8 +100,10 @@ body {
   $(document).ready(function(){
 	  //loadpage();
 		  //验证用户名
-	 }); 
-  function loginSubmit(){
+
+  
+	 });
+  /* function loginSubmit(){
 		var uname=$("#uname").val();
 		var upass=$("#upass").val();
 		var ucode=$("#code").val();
@@ -113,10 +114,6 @@ body {
 			 dataType:"json",  
 			 data:"m=150&uname="+uname+"&upass="+upass+"&code="+ucode, 
 			 success:function(result){
-				/*  var res =[];
-			 res = result.user.roles; 
-			 var str="administrator";
-			 var str2=res[0].rolename; */
 			 var resul=jQuery.parseJSON(result);
 			var res=result.success;
 			alert(resul.er_msg);
@@ -130,7 +127,21 @@ if(!res.success) {
 			 }); 
 		 
 		return false;
-	}
+	} */
   </script>
-
+   <!-- Angular -->
+  <script src="./script/angularjs/angular.js"></script>
+  <script src="./script/angularjs/angular-resource.js"></script>
+  <script src="./script/angularjs/angular-animate.js"></script>
+   <script src="./script/ui-bootstrap-tpls-1.1.1.js"></script>
+  <!-- UI-Router -->
+  <script src="./script/angularjs/angular-ui-router.js"></script>
+  <!-- App Script -->
+    <script src="./script/app/app.js"></script>
+    <script src="./script/app/service.js"></script>
+    <script src="./script/app/directive.js"></script>
+    <script src="./script/app/filter.js"></script>
+    <script src="./script/app/controller.js"></script>
+    
+    
 </html>
